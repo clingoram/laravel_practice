@@ -14,5 +14,14 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    // return view('welcome');
+
+    // 存取Model Merchandise的內容(連接到資料庫)
+    // $merchandise = App\Merchandise::all();
+    $mer = DB::table('shopcarts')->get();
+    // ->where('price',2)->value('name');
+    // $mer = select name from merchandises where price = 2;
+    return $mer;
+
+   
 });
