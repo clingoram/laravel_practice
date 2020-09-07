@@ -21,13 +21,15 @@ use Illuminate\Support\Facades\Route;
 // Controller把從Model那裏拿到的資料給View
 // View把資料編成Blade型態的HTML，之後顯示在瀏覽器讓user看到
 
-Route::get('/', function () {
-    return view('welcome');
-});
+// Route::get('/', function () {
+//     return view('index');
+// });
 
 // -----------------------------------------------
 // call controllers:
 // Route::http request('uri',controller's name@which function);
 // ------------------------------------------------
-Route::get('/','WebsiteManagement\WebsiteManagementController@index');
-Route::post('/management','WebsiteManagement\WebsiteManagementController@update');
+// Route::get('/','WebsiteManagement\WebsiteManagementController@index');
+Route::post('/management','WebsiteManagement\WebsiteManagementController@store');
+
+Route::get('/','Merchandise\MerchandiseController@index');
