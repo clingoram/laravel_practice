@@ -33,3 +33,9 @@ use Illuminate\Support\Facades\Route;
 Route::post('/management','WebsiteManagement\WebsiteManagementController@store');
 
 Route::get('/','Merchandise\MerchandiseController@index');
+
+// Route::group(['middleware'=>'management'],function(){
+//     Route::get('/',function(){
+
+//     });
+// });

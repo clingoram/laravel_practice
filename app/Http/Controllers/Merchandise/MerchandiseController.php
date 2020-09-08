@@ -18,7 +18,7 @@ class MerchandiseController extends Controller
     // }
     public function index()
     {
-        // to show all rows of data in index.blade.php
+        // to show all rows of datas from table merchandises in index.blade.php
         $products = DB::table('merchandises')->get();
 
         return view('index',['items'=> $products]);
