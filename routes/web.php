@@ -39,3 +39,6 @@ Route::get('/','Merchandise\MerchandiseController@index');
 
 //     });
 // });
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
