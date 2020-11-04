@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddProductimageMerchandiseTable extends Migration
+class CreateMerchandisesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddProductimageMerchandiseTable extends Migration
      */
     public function up()
     {
-        Schema::table('merchandise', function (Blueprint $table) {
-            //
+        Schema::create('merchandises', function (Blueprint $table) {
+            $table->id();
+            $table->string('name',80);
+            $table->string('price',50);
+            $table->timestamps();
             $table->string('image_path')->comment('商品url');
+            $table->integer('amount')->comment('商品數量');
         });
     }
 
@@ -26,8 +30,6 @@ class AddProductimageMerchandiseTable extends Migration
      */
     public function down()
     {
-        Schema::table('merchandise', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('merchandises');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class AddTotalpriceToShopcartTable extends Migration
+class CreateShopcartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,13 @@ class AddTotalpriceToShopcartTable extends Migration
      */
     public function up()
     {
-        Schema::table('shopcart', function (Blueprint $table) {
-            //
+        Schema::create('shopcarts', function (Blueprint $table) {
+            $table->id();
+            $table->integer('price')->comment('價格');
+            $table->integer('total_purchase_item')->comment('數量');
             $table->integer('total_price')->comment('總價');
+            $table->bigInteger('merchandise_id')->comment('商品id');
+            $table->timestamps();
         });
     }
 
@@ -26,8 +30,6 @@ class AddTotalpriceToShopcartTable extends Migration
      */
     public function down()
     {
-        Schema::table('shopcart', function (Blueprint $table) {
-            //
-        });
+        Schema::dropIfExists('shopcarts');
     }
 }

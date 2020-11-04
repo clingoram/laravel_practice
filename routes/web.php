@@ -29,16 +29,9 @@ use Illuminate\Support\Facades\Route;
 // call controllers:
 // Route::http request('uri',controller's name@which function);
 // ------------------------------------------------
-// Route::get('/','WebsiteManagement\WebsiteManagementController@index');
-Route::post('/management','WebsiteManagement\WebsiteManagementController@store');
-
-Route::get('/','Merchandise\MerchandiseController@index');
-
-// Route::group(['middleware'=>'management'],function(){
-//     Route::get('/',function(){
-
-//     });
-// });
 Auth::routes();
 
+// pages
+Route::get('/','WebsiteManagementController@index');
+// home
 Route::get('/home', 'HomeController@index')->name('home');
