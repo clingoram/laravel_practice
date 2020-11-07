@@ -15,10 +15,10 @@ class MerchandiseTableSeeder extends Seeder
          for ($i = 1; $i <= 10; $i++) {
             // 透過 DB class 建立資料
             DB::table('merchandises')->insert([
-                'name' => User::all()->random()->id,
+                'name' => Str::random(10),
                 'price' => Str::random(30),
                 'image_path' => now(),
-                'amount' => now(),
+                'amount' => Str::random(2),
             ]);
         }
     }
