@@ -14,6 +14,7 @@ class DatabaseSeeder extends Seeder
         // $this->call(UserSeeder::class);
         $this->call(MerchandiseTableSeeder::class);
 
-        factory(App\Merchandise::class, 10)->create();
+        DB::table('merchandises')->truncate();
+        factory(App\Models\Merchandise::class, 10)->create();
     }
 }

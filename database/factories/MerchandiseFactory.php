@@ -6,8 +6,8 @@ use App\Models\Merchandise;
 use Faker\Generator as Faker;
 
 $factory->define(Merchandise::class, function (Faker $faker) {
-
     return [
+        'id' => $faker->unique()->randomDigit,
         'name' => $faker->name,
         'price' => $faker->randomDigit,
         'image_path' => $faker->image($dir = '/tmp', $width = 640, $height = 480),
