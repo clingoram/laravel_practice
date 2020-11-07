@@ -6,7 +6,6 @@ use App\Models\Merchandise;
 use Faker\Generator as Faker;
 
 $factory->define(Merchandise::class, function (Faker $faker) {
-
     return [
         'id' => $faker->unique()->randomDigit,
         'name' => $faker->name,
