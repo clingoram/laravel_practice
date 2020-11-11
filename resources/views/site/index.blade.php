@@ -4,6 +4,7 @@
     <div id='app'></div>
     <div class="container">
 
+      @if(count($items) >= 1)
         <div class="row row-cols-1 row-cols-md-3">
             @foreach($items as $k)
             <div class="col mb-4">
@@ -18,6 +19,10 @@
             </div>
             @endforeach
         </div>
+
+      @else
+        <p>OOPS</p>
+      @endif
 
         @yield('content')
         @include('layouts.footer')
