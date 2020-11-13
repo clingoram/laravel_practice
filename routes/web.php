@@ -31,7 +31,8 @@ use Illuminate\Support\Facades\Route;
 // ------------------------------------------------
 Auth::routes();
 
-// Route::get('/','WebsiteManagementController@index');
-Route::get('/','MerchandiseController@index');
+Route::get('/','WebsiteManagementController@index');
+// Route::get('/add','MerchandiseController@create');
+
 // home
 Route::get('/home', 'HomeController@index')->name('home');
