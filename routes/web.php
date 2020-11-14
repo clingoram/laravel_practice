@@ -33,7 +33,7 @@ Auth::routes();
 
 Route::get('/','PageController@index');
 
-Route::resource('product','WebsiteManagementController');
+Route::resource('product','MerchandiseController');
 
 // Route::get('/add','MerchandiseController@create');
 
