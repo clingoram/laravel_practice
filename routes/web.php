@@ -31,7 +31,10 @@ use Illuminate\Support\Facades\Route;
 // ------------------------------------------------
 Auth::routes();
 
-Route::get('/','WebsiteManagementController@index');
+Route::get('/','PageController@index');
+
+Route::resource('product','WebsiteManagementController');
+
 // Route::get('/add','MerchandiseController@create');
 
 // home

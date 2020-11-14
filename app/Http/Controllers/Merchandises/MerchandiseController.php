@@ -22,6 +22,7 @@ class MerchandiseController extends Controller
         $products = Merchandises::get();//DB::table('merchandises')->get();
 
         return view('site.index',['items'=> $products]);
+
     }
 
     // 管理員上傳商品頁面

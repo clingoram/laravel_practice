@@ -52,7 +52,7 @@
                         @else
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/add">上架</a>
+                                    <a class="nav-link" href="/product">上架</a>
                                 </li>
                                 
                             </ul>
