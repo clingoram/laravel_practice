@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 // 對應model
 use App\Merchandise;
 // use App\Auth;
+use DateTime;
 
 // DB
 use Illuminate\Support\Facades\DB;
@@ -25,15 +26,13 @@ class MerchandiseController extends Controller
 
         $user = Auth::user();
 
-        if($user->role == 'A'){
+        if(isset(Auth::user()->id) AND $user->role == 'A'){
             // if admin is login
-            $direct_page = 'site.product_management';
+            return view('site.product_management');
         }else{
             // to login page
-            $direct_page = 'auth.login';
+            return redirect('/')->with('error','Please login.');
         }
-
-        return view($direct_page);
     }
 
      /**
@@ -44,15 +43,15 @@ class MerchandiseController extends Controller
     // 管理員上傳商品頁面
     public function create()
     {
-        // $user = Auth::user();
+    //     // $user = Auth::user();
 
-        // if($user->role == 'A'){
-        //     // if admin is login
-        //     $direct_page = 'site.product_management';
-        // }else{
-        //     // to login page
-        //     $direct_page = 'auth.login';
-        // }
+    //     // if($user->role == 'A'){
+    //     //     // if admin is login
+    //     //     $direct_page = 'site.product_management';
+    //     // }else{
+    //     //     // to login page
+    //     //     $direct_page = 'auth.login';
+    //     // }
 
         return view('site.product_management');
     }
@@ -67,7 +66,36 @@ class MerchandiseController extends Controller
     // save
     public function store(Request $request)
     {
+        $now = new DateTime();
 
+        $data_validate = $this->validate($request,[
+            'product_name'=> 'required',
+            'price'=>'required',
+            'product_number' => 'required',
+            'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1024'
+        ]);
+
+        if($request->file('image')){
+            // 請求取得上傳圖片的原始名稱
+            $filename_to_store = $request->file('image')->getClientOriginalName();
+            $extension = $request->file('image')->getClientOriginalExtension();
+            $file_name = $filename_to_store;
+            $file_path = $request->file('image')->storeAs('public/images',$file_name);
+
+        }else{
+            $file_name = 'no_image.jpeg';
+        }
+
+        // insert data into table
+        $insert_merchandise = DB::table('merchandises')->insert([
+            'name'=> $data_validate['product_name'],
+            'price'=> $data_validate['price'],
+            'amount'=> $data_validate['product_number'],
+            'image_path' => $file_name,
+            'created_at' => $now
+        ]);
+
+        return redirect('/')->with('success','New Product');
     }
 
      /**
