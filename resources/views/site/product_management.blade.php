@@ -2,29 +2,71 @@
 @extends('layouts.app')
 @section('content')
 <div class="container">
-    <div class="col-sm-9">
+
+    <h1>新增商品</h1>
+
+    {{-- <div class="col-sm-9"> --}}
+        
+        {!! Form::open(['action' => 'MerchandiseController@store','method' => 'POST','enctype'=>'multipart/form-data']) !!}
         <div class="row">
             <div class="col-4">
-                <h6>商品名稱</h6>
+                {{ Form::label('product_name','商品名') }}
             </div>
             <div class="col-6">
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                {{ Form::text('product_name','',['class' => 'form-control','placeholder' => '商品名稱']) }}
             </div>
             <div class="col-2"></div>
         </div>
-    </div>
+        <br>
 
-    <div class="col-sm-9">
         <div class="row">
             <div class="col-4">
-                <h6>商品價錢</h6>
+                {{ Form::label('image','上傳商品圖片') }}
             </div>
             <div class="col-6">
-                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-sm">
+                {{ Form::file('image') }}
             </div>
             <div class="col-2"></div>
         </div>
-    </div>
+        <br>
+    
+       <div class="row">
+            <div class="col-4">
+                {{ Form::label('price','商品價錢') }}
+            </div>
+            <div class="col-6">
+                {{ Form::number('price','', [ 'class' => 'form-control','min' => 1]) }}
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <br>
 
+        <div class="row">
+            <div class="col-4">
+                {{ Form::label('product_number','商品數量') }}
+            </div>
+            <div class="col-6">
+                {{ Form::number('product_number','', [ 'class' => 'form-control','min' => 1,'max'=>1000]) }}
+            </div>
+            <div class="col-2"></div>
+        </div>
+        <br>
+
+        {{-- <div class="row">
+            <div class="col-4">
+                {{ Form::label('description','商品說明') }}
+            </div>
+            <div class="col-6">
+                {{ Form::textarea('description','', [ 'class' => 'form-control','row' => 3]) }}
+            </div>
+            <div class="col-2">
+        </div>
+        <br> --}}
+
+        {{ Form::submit('Submit',['class' => 'btn btn-primary']) }}
+
+        {!! Form::close() !!}
+        <br>
+    {{-- </div> --}}
 </div>
 @endsection
