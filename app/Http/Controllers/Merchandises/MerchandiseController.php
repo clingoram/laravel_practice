@@ -75,7 +75,7 @@ class MerchandiseController extends Controller
             'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
-        if($request->file('image')){
+        if($request->hasFile('image')){
             // 請求取得上傳圖片的原始名稱
             $filename_to_store = $request->file('image')->getClientOriginalName();
             $extension = $request->file('image')->getClientOriginalExtension();
