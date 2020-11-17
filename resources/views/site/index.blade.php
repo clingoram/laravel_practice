@@ -12,18 +12,21 @@
               <div class="col mb-4">
 
                 <div class="card">
+                  <a href="/product/{{ $k->id }}" style="text-decoration:none">
+                    @if(isset($k->image_path) AND $k->image_path != 'no_image.jpeg')
+                      <img style="width:200px" src="/storage/images/{{$k->image_path}}">
+                    @endif
 
-                  @if(isset($k->image_path) AND $k->image_path != 'no_image.jpeg')
-                    <img style="width:200px" src="/storage/images/{{$k->image_path}}">
-                  @endif
-
-                  <div class="card-body">
-                    <h5 class="card-title">{{ $k->name }}</h5>
-                    <p class="card-text">${{ $k->price }}</p>
-                    <p class="card-text">商品數量: {{ $k->amount }}</p>
-                  </div>
+                    <div class="card-body">
+                      <h5 class="card-title">{{ $k->name }}</h5>
+                      <p class="card-text">${{ $k->price }}</p>
+                      <p class="card-text">商品數量: {{ $k->amount }}</p>
+                    </div>
+                  </a>
                 </div>
+
               </div>
+
             @endforeach
 
         </div>
