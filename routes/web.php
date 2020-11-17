@@ -34,8 +34,7 @@ Auth::routes();
 Route::get('/','PageController@index');
 
 Route::resource('product','MerchandiseController');
-
-// Route::get('/add','MerchandiseController@create');
+Route::resource('cart','ShopcartController');
 
 // home
 Route::get('/home', 'HomeController@index')->name('home');

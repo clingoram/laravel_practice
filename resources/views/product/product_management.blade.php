@@ -52,17 +52,6 @@
         </div>
         <br>
 
-        {{-- <div class="row">
-            <div class="col-4">
-                {{ Form::label('description','商品說明') }}
-            </div>
-            <div class="col-6">
-                {{ Form::textarea('description','', [ 'class' => 'form-control','row' => 3]) }}
-            </div>
-            <div class="col-2">
-        </div>
-        <br> --}}
-
         {{ Form::submit('Submit',['class' => 'btn btn-primary']) }}
 
         {!! Form::close() !!}

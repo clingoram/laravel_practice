@@ -28,7 +28,7 @@ class MerchandiseController extends Controller
 
         if(isset(Auth::user()->id) AND $user->role == 'A'){
             // if admin is login
-            return view('site.product_management');
+            return view('product.product_management');
         }else{
             // to login page
             return redirect('/')->with('error','Please login.');
@@ -43,17 +43,7 @@ class MerchandiseController extends Controller
     // 管理員上傳商品頁面
     public function create()
     {
-    //     // $user = Auth::user();
-
-    //     // if($user->role == 'A'){
-    //     //     // if admin is login
-    //     //     $direct_page = 'site.product_management';
-    //     // }else{
-    //     //     // to login page
-    //     //     $direct_page = 'auth.login';
-    //     // }
-
-        return view('site.product_management');
+        return view('product.product_management');
     }
 
     /**
@@ -106,7 +96,9 @@ class MerchandiseController extends Controller
      */
     public function show($id)
     {
-      
+      $get_specific_data = DB::table('merchandises')->find($id);
+
+      return view('product.introduction')->with('product',$get_specific_data);
 
     }
 
