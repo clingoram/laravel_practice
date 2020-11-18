@@ -50,12 +50,20 @@
                             @endif
                            
                         @else
+                            @if(Auth::user()->role == 'A')
+                                <ul class="nav nav-pills">
+                                    <li class="nav-item">
+                                        <a class="nav-link" href="/product">上架</a>
+                                    </li>
+                                </ul>
+                            @endif
+
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                    <a class="nav-link" href="/product">上架</a>
+                                <a class="nav-link" href="/cart/{{ Auth::user()->id }}">購物車</a>
                                 </li>
-                                
                             </ul>
+
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
                                     {{ Auth::user()->name }}

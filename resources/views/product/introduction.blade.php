@@ -12,16 +12,16 @@
                  @endif
 
                 <div class="col-md-8">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ $product->name}}</h5>
-                        <p class="card-text">售價: ${{ $product->price }}</p>
+                    <div class="card-body" id="">
+                    <h5 class="card-title" id="product_name_{{$product->id}}">{{ $product->name}}</h5>
+                    <p class="card-text" id="product_price_{{$product->price}}">售價: ${{ $product->price }}</p>
                         <p class="card-text">商品數量: {{ $product->amount }}</p>
                         {{-- <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p> --}}
                         <p class="card-text">欲購買數量:
 
                             {!! Form::open(['action' => 'ShopcartController@store','method' => 'POST','enctype'=>'multipart/form-data']) !!}
-                                {{ Form::selectRange('number', 1, $product->amount) }}
-                                {{ Form::button('放進購物車',['class' => 'btn btn-primary']) }}
+                                {{ Form::selectRange('purchase_number', 1, $product->amount) }}
+                                {{ Form::submit('放進購物車',['class' => 'btn btn-primary']) }}
                             {!! Form::close() !!}
                         </p>
                     </div>
