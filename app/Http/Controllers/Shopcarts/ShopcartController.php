@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
+
 // 對應model
 use App\Merchandise;
 use App\Shopcart;
@@ -10,8 +13,6 @@ use DateTime;
 // DB
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
-
-use Illuminate\Http\Request;
 
 class ShopcartController extends Controller
 {
@@ -56,6 +57,14 @@ class ShopcartController extends Controller
             // if user is login
             $user = Auth::user();
 
+            $data = $this->validate($request,[
+                'price' => 'required',
+                'number' => 'required',
+                'merchandise_id' => 'required'
+            ]);
+
+            return view('member.shop_cart');
+            
         }else{
             // direct to login page
             return view('auth.login');
