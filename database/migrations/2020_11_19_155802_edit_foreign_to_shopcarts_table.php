@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class EditForeignToShopcarts extends Migration
+class EditForeignToShopcartsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,9 @@ class EditForeignToShopcarts extends Migration
      */
     public function up()
     {
-        Schema::disableForeignKeyConstraints();
         Schema::table('shopcarts', function (Blueprint $table) {
-            $table->foreign('merchandise_id')->references('id')->on('merchandises')->onUpdate('cascade');
+            $table->foreign('userid')->references('id')->on('users')->onUpdate('cascade');
         });
-        Schema::enableForeignKeyConstraints();
     }
 
     /**
@@ -29,7 +27,7 @@ class EditForeignToShopcarts extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::table('shopcarts', function (Blueprint $table) {
-            $table->dropForeign(['merchandise_id']);
+            $table->dropForeign(['userid']);
         });
         Schema::enableForeignKeyConstraints();
     }

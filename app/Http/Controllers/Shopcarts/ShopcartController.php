@@ -23,15 +23,8 @@ class ShopcartController extends Controller
      */
     public function index()
     {
-        // check if user is login or not
-        // if(Auth::check()){
-        //     // if user is login
-        //     $user = Auth::user();
-
-        // }else{
-        //     // direct to login page
-        //     return view('auth.login');
-        // }
+        $user = Auth::user();
+        return view('member.shop_cart',['member'=> $user->id]);
     }
 
     /**
@@ -62,7 +55,19 @@ class ShopcartController extends Controller
                 'number' => 'required',
                 'merchandise_id' => 'required'
             ]);
+            dd($data);die();
+            $now = new DateTime();
 
+            // insert data into table
+            $insert_data = DB::table('shopcarts')->insert([
+                'price'=> $data['number'],
+                'total_purchase_item'=> $data['price'],
+                'total_price' => $data['number'] * $data['price'],
+                'merchandise_id'=> $data['merchandise_id'],
+                'created_at' => $now
+            ]);
+
+            // return redirect('/')->with('success','add');
             return view('member.shop_cart');
             
         }else{

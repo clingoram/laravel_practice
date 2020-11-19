@@ -18,7 +18,7 @@ class CreateShopcartsTable extends Migration
             $table->integer('price')->comment('價格');
             $table->integer('total_purchase_item')->comment('數量');
             $table->integer('total_price')->comment('總價');
-            $table->bigInteger('merchandise_id')->comment('商品id');
+            $table->unsignedBigInteger('merchandise_id')->comment('商品id');
             $table->timestamps();
         });
     }
