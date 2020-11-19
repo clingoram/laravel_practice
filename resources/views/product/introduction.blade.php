@@ -12,7 +12,7 @@
                  @endif
 
                 <div class="col-md-8">
-                    <div class="card-body" id="">
+                    <div class="card-body">
                     <h5 class="card-title" id="product_name_{{$product->id}}">{{ $product->name}}</h5>
                     <p class="card-text" id="product_price_{{$product->price}}">售價: ${{ $product->price }}</p>
                         <p class="card-text">商品數量: {{ $product->amount }}</p>

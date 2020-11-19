@@ -60,7 +60,7 @@
 
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                <a class="nav-link" href="/cart/{{ Auth::user()->id }}">購物車</a>
+                                <a class="nav-link" href="/cart">購物車</a>
                                 </li>
                             </ul>
 
