@@ -73,7 +73,7 @@ class ShopcartController extends Controller
                 // 會員ID
                 'userid' => $user->id
             ]);
-            var_dump($insert_data);die();
+            // var_dump($insert_data);die();
 
             // return redirect('/')->with('success','add');
             return view('member.shop_cart');
