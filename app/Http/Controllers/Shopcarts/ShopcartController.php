@@ -50,27 +50,35 @@ class ShopcartController extends Controller
             // if user is login
             $user = Auth::user();
 
-            $data = $this->validate($request,[
-                'price' => 'required',
-                'number' => 'required',
-                'merchandise_id' => 'required'
-            ]);
-            dd($data);die();
-            $now = new DateTime();
+            // 取得目前商品頁的商品id
+            $merchandise_data = DB::table('merchandises')->find(20);
 
+            $data = $this->validate($request,[
+                'purchase_number' => 'required'
+            ]);
+
+            $now = new DateTime();
+            
             // insert data into table
             $insert_data = DB::table('shopcarts')->insert([
-                'price'=> $data['number'],
-                'total_purchase_item'=> $data['price'],
-                'total_price' => $data['number'] * $data['price'],
-                'merchandise_id'=> $data['merchandise_id'],
-                'created_at' => $now
+                // 售價
+                'price' => $merchandise_data->price,
+                // 欲購買數量
+                'total_purchase_item' => $data['purchase_number'],
+                // 總價
+                'total_price' => $merchandise_data->price * $data['purchase_number'],
+                // 商品ID
+                'merchandise_id' => $merchandise_data->id,
+                'created_at' => $now,
+                // 會員ID
+                'userid' => $user->id
             ]);
+            var_dump($insert_data);die();
 
             // return redirect('/')->with('success','add');
             return view('member.shop_cart');
             
-        }else{
+        }else {
             // direct to login page
             return view('auth.login');
         }
@@ -84,7 +92,10 @@ class ShopcartController extends Controller
      */
     public function show($id)
     {
-        //
+        // 取得特定會員購物車內的資料
+        $member_cartData = DB::table('shopcarts')->where('userid',$id)->get();
+        return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+
     }
 
     /**
