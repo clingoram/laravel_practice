@@ -26,10 +26,10 @@ class MerchandiseController extends Controller
 
         $user = Auth::user();
 
-        if(isset(Auth::user()->id) AND $user->role == 'A'){
+        if(isset(Auth::user()->id) AND $user->role == 'A') {
             // if admin is login
             return view('product.product_management');
-        }else{
+        } else {
             // to login page
             return redirect('/')->with('error','Please login.');
         }
@@ -65,14 +65,14 @@ class MerchandiseController extends Controller
             'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
-        if($request->hasFile('image')){
+        if($request->hasFile('image')) {
             // 請求取得上傳圖片的原始名稱
             $filename_to_store = $request->file('image')->getClientOriginalName();
             $extension = $request->file('image')->getClientOriginalExtension();
             $file_name = $filename_to_store;
             $file_path = $request->file('image')->storeAs('public/images',$file_name);
 
-        }else{
+        } else {
             $file_name = 'no_image.jpeg';
         }
 
@@ -96,9 +96,10 @@ class MerchandiseController extends Controller
      */
     public function show($id)
     {
-      $get_specific_data = DB::table('merchandises')->find($id);
+        // 特定商品介紹頁面
+        $get_specific_data = DB::table('merchandises')->find($id);
 
-      return view('product.introduction')->with('product',$get_specific_data);
+        return view('product.introduction')->with('product',$get_specific_data);
 
     }
 
