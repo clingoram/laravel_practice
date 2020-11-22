@@ -23,8 +23,11 @@ class ShopcartController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('member.shop_cart',['member'=> $user->id]);
+        if(Auth()::check()){
+            $user = Auth::user();
+            return view('member.shop_cart',['member'=> $user->id]);
+
+        }
     }
 
     /**
@@ -92,10 +95,12 @@ class ShopcartController extends Controller
      */
     public function show($id)
     {
-        // 取得特定會員購物車內的資料
-        $member_cartData = DB::table('shopcarts')->where('userid',$id)->get();
-        return view('member.shop_cart')->with('shopcartdata',$member_cartData);
-
+        if(Auth::check()){
+            // 取得特定會員購物車內的資料
+            $member_cartData = DB::table('shopcarts')->where('userid',$id)->get();
+            return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+        }
+        return view('auth.login');
     }
 
     /**
