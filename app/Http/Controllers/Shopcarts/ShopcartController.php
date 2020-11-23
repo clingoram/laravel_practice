@@ -23,8 +23,10 @@ class ShopcartController extends Controller
      */
     public function index()
     {
-        $user = Auth::user();
-        return view('member.shop_cart',['member'=> $user->id]);
+        if(Auth::check()){
+            $user = Auth::user();
+            return view('member.shop_cart',['member'=> $user->id]);
+        }
     }
 
     /**
@@ -73,9 +75,6 @@ class ShopcartController extends Controller
                 // 會員ID
                 'userid' => $user->id
             ]);
-            var_dump($insert_data);die();
-
-            // return redirect('/')->with('success','add');
             return view('member.shop_cart');
             
         }else {
@@ -92,10 +91,22 @@ class ShopcartController extends Controller
      */
     public function show($id)
     {
-        // 取得特定會員購物車內的資料
-        $member_cartData = DB::table('shopcarts')->where('userid',$id)->get();
-        return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+        if(Auth::check()){
+            // 取得特定會員購物車內的資料
+            /*
+                SELECT * FROM shopcarts as cart
+                join merchandises as product
+                on cart.merchandise_id = product.id
+                where cart.userid = 1
+            */
 
+            $member_cartData = DB::table('shopcarts')->join('merchandises','shopcarts.merchandise_id','=','merchandises.id')->orderBy('shopcarts.created_at', 'desc')->get();
+
+            $sum_price = DB::table('shopcarts');
+
+            return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+        }
+        return view('auth.login');
     }
 
     /**

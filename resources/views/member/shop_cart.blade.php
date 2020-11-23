@@ -19,11 +19,10 @@
                 @foreach($shopcartdata as $key)
                     <tr>
                         <th scope="row">1</th>
-                        <td>{{ $key->merchandise_id  }}</td>
+                        <td>{{ $key->name  }}</td>
                         <td>$ {{ $key->price }}</td>
                         <td>{{ $key->total_purchase_item }}</td>
                     </tr>
-                <p>總價: {{ $key->total_price }}</p>
                 @endforeach
             </tbody>
 
