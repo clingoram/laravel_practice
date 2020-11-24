@@ -20,10 +20,6 @@ class MerchandiseController extends Controller
     public function index()
     {
         // to show all rows of datas from table merchandises in index.blade.php
-        // $products = Merchandises::get();//DB::table('merchandises')->get();
-
-        // return view('site.index',['items'=> $products]);
-
         $user = Auth::user();
 
         if(isset(Auth::user()->id) AND $user->role == 'A') {
