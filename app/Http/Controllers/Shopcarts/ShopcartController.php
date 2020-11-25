@@ -53,7 +53,7 @@ class ShopcartController extends Controller
 
             // if user is login
             $user = Auth::user();
-            // print_r($request()->post());die();
+
             $data = $this->validate($request,[
                 'purchase_number' => 'required'
             ]);
@@ -74,6 +74,7 @@ class ShopcartController extends Controller
                 'total_price' => $merchandise_data->price * $data['purchase_number'],
                 // 商品ID
                 'merchandise_id' => $merchandise_data->id,
+                // 建立時間
                 'created_at' => $now,
                 // 會員ID
                 'userid' => $user->id
