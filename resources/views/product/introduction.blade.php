@@ -25,6 +25,8 @@
                             <p class="card-text">欲購買數量:
                                 {{ Form::selectRange('purchase_number', 1, $product->amount) }}
                             </p>
+                            {{ Form::hidden('product_id', $product->id) }}
+
                             {{ Form::submit('放進購物車',['class' => 'btn btn-primary']) }}
                         </div>
                     {!! Form::close() !!}

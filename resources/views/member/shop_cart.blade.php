@@ -4,7 +4,7 @@
     <div class="container">
         <h6 class="title-canter">購物車</h6>
 
-        @if(isset($shopcartdata) AND count($shopcartdata) > 1)
+        @if(isset($shopcartdata) AND count($shopcartdata) >= 1)
             <table class="table">
                 <thead>
                 <tr>

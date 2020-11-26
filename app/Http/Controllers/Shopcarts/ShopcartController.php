@@ -55,11 +55,11 @@ class ShopcartController extends Controller
             $user = Auth::user();
 
             $data = $this->validate($request,[
-                'purchase_number' => 'required'
+                'purchase_number' => 'required',
+                'product_id' => 'required'
             ]);
-            
             // 取得點選商品頁的商品id
-            $merchandise_data = DB::table('merchandises')->find(20);
+            $merchandise_data = DB::table('merchandises')->find($data['product_id']);
 
             // 年月日
             $now = new DateTime();
