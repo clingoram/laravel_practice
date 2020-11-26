@@ -105,7 +105,6 @@ class ShopcartController extends Controller
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
-            // print_r($member_cartData);die();
 
             // $sum_price = DB::table('shopcarts');
 
