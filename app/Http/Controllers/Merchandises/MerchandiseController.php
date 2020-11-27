@@ -121,7 +121,7 @@ class MerchandiseController extends Controller
     // 更新商品
     public function update(Request $request, $id)
     {
-
+        // 結帳後，商品數量減少
     }
 
      /**

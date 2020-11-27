@@ -53,13 +53,13 @@ class ShopcartController extends Controller
 
             // if user is login
             $user = Auth::user();
-            // print_r($request()->post());die();
+
             $data = $this->validate($request,[
-                'purchase_number' => 'required'
+                'purchase_number' => 'required',
+                'product_id' => 'required'
             ]);
-            
             // 取得點選商品頁的商品id
-            $merchandise_data = DB::table('merchandises')->find(20);
+            $merchandise_data = DB::table('merchandises')->find($data['product_id']);
 
             // 年月日
             $now = new DateTime();
@@ -74,6 +74,7 @@ class ShopcartController extends Controller
                 'total_price' => $merchandise_data->price * $data['purchase_number'],
                 // 商品ID
                 'merchandise_id' => $merchandise_data->id,
+                // 建立時間
                 'created_at' => $now,
                 // 會員ID
                 'userid' => $user->id
@@ -95,7 +96,10 @@ class ShopcartController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        if(Auth::check() AND $user->id == $id){
+        // var_dump($user);die();
+        // $shopCart = DB::table('shopcarts')->where('userid','=',$user->id)->get();
+        // var_dump($shopCart);die();
+        if(Auth::check() AND $user->id == $id) {
             // 取得登入會員購物車內的資料
             $member_cartData = DB::table('shopcarts AS cart')
                             ->join('merchandises AS product', function ($join) use ($id) {
@@ -104,8 +108,6 @@ class ShopcartController extends Controller
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
-            // print_r($member_cartData);die();
-
             // $sum_price = DB::table('shopcarts');
 
             return view('member.shop_cart')->with('shopcartdata',$member_cartData);
@@ -144,6 +146,13 @@ class ShopcartController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $shopCart = DB::table('shopcarts')->find($id);
+        if(Auth::user()->id !== $shopCart->userid) {
+            return redirect('/')->with('error','Error!!The permission is denied.');
+        }
+        // $shopCart->delete();
+
+        // return redirect('/')->with('success','Product removed!!');
+
     }
 }
