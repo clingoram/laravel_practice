@@ -12,17 +12,25 @@
                     <th scope="col">商品名稱</th>
                     <th scope="col">單項價格</th>
                     <th scope="col">數量</th>
+                    <th scope="col">詳細</th>
                 </tr>
                 </thead>
 
                 <tbody>
                     @php($i = 1)
                     @foreach($shopcartdata as $key)
+                    {{-- @php(print_r($shopcartdata)) --}}
                         <tr>
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $key->name  }}</td>
                             <td>$ {{ $key->price }}</td>
-                            <td>{{ $key->total_purchase_item }}</td>
+                            <td>
+                                <input type="number" min="1" max="{{ $key->amount}}" value="{{ $key->total_purchase_item }}">
+                            </td>
+                            {{-- <td>{{ Form::selectRange('number', $key->total_purchase_item, 20) }}</td> --}}
+                            <td>
+                                <button type="button" class="btn btn-danger" id="{{ $key->id }}">刪除</button>
+                            </td>
                         </tr>
                     @endforeach
                 </tbody>
