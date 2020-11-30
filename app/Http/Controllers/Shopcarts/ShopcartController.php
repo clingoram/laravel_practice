@@ -96,10 +96,9 @@ class ShopcartController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        // var_dump($user);die();
-        // $shopCart = DB::table('shopcarts')->where('userid','=',$user->id)->get();
-        // var_dump($shopCart);die();
-        if(Auth::check() AND $user->id == $id) {
+        $shopCart = DB::table('shopcarts')->where('userid',$user->id)->select('status')->first();
+
+        if(Auth::check() AND $user->id == $id AND $shopCart->status) {
             // 取得登入會員購物車內的資料
             $member_cartData = DB::table('shopcarts AS cart')
                             ->join('merchandises AS product', function ($join) use ($id) {
@@ -150,9 +149,9 @@ class ShopcartController extends Controller
         if(Auth::user()->id !== $shopCart->userid) {
             return redirect('/')->with('error','Error!!The permission is denied.');
         }
-        // $shopCart->delete();
+        $shopCart->delete();
 
-        // return redirect('/')->with('success','Product removed!!');
+        return redirect('/')->with('success','Product removed!!');
 
     }
 }
