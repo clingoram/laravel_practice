@@ -79,7 +79,9 @@ class ShopcartController extends Controller
                 // 會員ID
                 'userid' => $user->id
             ]);
+            
             return view('member.shop_cart');
+            // return redirect('/cart')->with('success','add');
             
         }else {
             // direct to login page
@@ -145,11 +147,13 @@ class ShopcartController extends Controller
      */
     public function destroy($id)
     {
-        $shopCart = DB::table('shopcarts')->find($id);
-        if(Auth::user()->id !== $shopCart->userid) {
-            return redirect('/')->with('error','Error!!The permission is denied.');
-        }
-        $shopCart->delete();
+        // $userId = Auth::user()->id;
+        $shopCart = DB::table('shopcarts')->where('merchandise_id','=',$id)->delete();
+
+        // if($userId !== $shopCart->userid) {
+        //     return redirect('/')->with('error','Error!!The permission is denied.');
+        // }
+        // $shopCart->delete();
 
         return redirect('/')->with('success','Product removed!!');
 

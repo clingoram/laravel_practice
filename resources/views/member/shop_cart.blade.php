@@ -29,8 +29,12 @@
                             </td>
                             {{-- <td>{{ Form::selectRange('number', $key->total_purchase_item, 20) }}</td> --}}
                             <td>
-                                <button type="button" class="btn btn-danger" id="{{ $key->id }}">刪除</button>
+                                {!! Form::open(['action'=>['ShopcartController@destroy',$key->id],'method'=>'POST','class'=>'pull-right']) !!}
+                                {{ Form::hidden('_method','DELETE') }}
+                                {{ Form::submit('刪除',['class'=>'btn btn-danger btn-sm']) }}
+                                {!! Form::close() !!}
                             </td>
+
                         </tr>
                     @endforeach
                 </tbody>
