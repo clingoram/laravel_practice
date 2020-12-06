@@ -79,9 +79,7 @@ class ShopcartController extends Controller
                 // 會員ID
                 'userid' => $user->id
             ]);
-            
-            return view('member.shop_cart');
-            // return redirect('/cart')->with('success','add');
+            return redirect('product')->with('success','add');
             
         }else {
             // direct to login page
@@ -98,9 +96,9 @@ class ShopcartController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        $shopCart = DB::table('shopcarts')->where('userid',$user->id)->select('status')->first();
+        // $shopCart = DB::table('shopcarts')->where('userid',$user->id)->select('status')->first();
 
-        if(Auth::check() AND $user->id == $id AND $shopCart->status) {
+        if(Auth::check() AND $user->id == $id ) {
             // 取得登入會員購物車內的資料
             $member_cartData = DB::table('shopcarts AS cart')
                             ->join('merchandises AS product', function ($join) use ($id) {
