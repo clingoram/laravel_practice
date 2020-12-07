@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
 // 對應model
 use App\Merchandise;
 use App\Shopcart;
@@ -58,9 +57,11 @@ class ShopcartController extends Controller
                 'purchase_number' => 'required',
                 'product_id' => 'required'
             ]);
-            // 取得點選商品頁的商品id
-            $merchandise_data = DB::table('merchandises')->find($data['product_id']);
 
+            // 取得點選商品頁的商品id
+            // $merchandise_data = DB::table('merchandises')->find($data['product_id']);
+            $merchandise_data = Merchandise::find($data['product_id']);
+ 
             // 年月日
             $now = new DateTime();
             
@@ -107,6 +108,8 @@ class ShopcartController extends Controller
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
+
+
             // $sum_price = DB::table('shopcarts');
 
             return view('member.shop_cart')->with('shopcartdata',$member_cartData);

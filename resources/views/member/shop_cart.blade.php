@@ -34,12 +34,11 @@
                                 {{ Form::submit('刪除',['class'=>'btn btn-danger btn-sm']) }}
                                 {!! Form::close() !!}
                             </td>
-
                         </tr>
                     @endforeach
                 </tbody>
-
             </table>
+            <h1>總共: 元</h1>
         @else
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
