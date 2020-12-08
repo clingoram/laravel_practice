@@ -109,7 +109,6 @@ class ShopcartController extends Controller
                             })
                             ->get();
 
-
             // $sum_price = DB::table('shopcarts');
 
             return view('member.shop_cart')->with('shopcartdata',$member_cartData);

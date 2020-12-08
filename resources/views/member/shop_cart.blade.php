@@ -25,7 +25,7 @@
                             <td>{{ $key->name  }}</td>
                             <td>$ {{ $key->price }}</td>
                             <td>
-                                <input type="number" min="1" max="{{ $key->amount}}" value="{{ $key->total_purchase_item }}">
+                                <input type="number" min="1" max="{{ $key->amount }}" value="{{ $key->total_purchase_item }}">
                             </td>
                             {{-- <td>{{ Form::selectRange('number', $key->total_purchase_item, 20) }}</td> --}}
                             <td>
