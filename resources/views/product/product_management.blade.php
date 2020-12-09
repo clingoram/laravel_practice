@@ -8,6 +8,7 @@
     {{-- <div class="col-sm-9"> --}}
         
         {!! Form::open(['action' => 'MerchandiseController@store','method' => 'POST','enctype'=>'multipart/form-data']) !!}
+        @csrf
         <div class="row">
             <div class="col-4">
                 {{ Form::label('product_name','商品名') }}
