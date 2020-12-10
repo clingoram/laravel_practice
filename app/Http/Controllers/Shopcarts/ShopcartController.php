@@ -26,11 +26,11 @@ class ShopcartController extends Controller
         $this->middleware('auth');
     }
     
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     // public function index()
     // {
     //     if(Auth::check()){
@@ -118,8 +118,6 @@ class ShopcartController extends Controller
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
-
-            // $sum_price = DB::table('shopcarts');
 
             return view('member.shop_cart')->with('shopcartdata',$member_cartData);
         }

@@ -27,7 +27,6 @@
                             <td>
                                 <input type="number" min="1" max="{{ $key->amount }}" value="{{ $key->total_purchase_item }}">
                             </td>
-                            {{-- <td>{{ Form::selectRange('number', $key->total_purchase_item, 20) }}</td> --}}
                             <td>
                                 {!! Form::open(['action'=>['ShopcartController@destroy',$key->id],'method'=>'POST','class'=>'pull-right']) !!}
                                 @csrf
@@ -36,10 +35,14 @@
                                 {!! Form::close() !!}
                             </td>
                         </tr>
+                        
                     @endforeach
                 </tbody>
             </table>
-            <h1>總共: 元</h1>
+            @foreach($shopcartdata as $k)
+                <h1>總共: {{ $k->total_price }} 元</h1>
+            @endforeach
+
         @else
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">
