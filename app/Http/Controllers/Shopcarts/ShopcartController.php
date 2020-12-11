@@ -107,19 +107,27 @@ class ShopcartController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        // $shopCart = DB::table('shopcarts')->where('userid',$user->id)->select('status')->first();
 
         if(Auth::check() AND $user->id == $id ) {
             // 取得登入會員購物車內的資料
-            $member_cartData = DB::table('shopcarts AS cart')
+            $member_cartData = DB::table('shopcarts AS cart',)
                             ->join('merchandises AS product', function ($join) use ($id) {
                                 $join->on('cart.merchandise_id', '=', 'product.id')
                                     ->where('cart.userid', '=',$id)
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
+            // 計算購物車總金額
+            $total = DB::table('shopcarts AS cart')->where('cart.userid', '=',$id)->sum('total_price');
 
-            return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+            $shopcartdata = [
+                'list' => $member_cartData,
+                'total_cost' => $total
+            ];
+
+            // return view('member.shop_cart')->with('shopcartdata',$member_cartData)->with('total_cost',$total);
+            return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
+
         }
         return view('auth.login');
     }

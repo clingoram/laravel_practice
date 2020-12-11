@@ -18,7 +18,7 @@
 
                 <tbody>
                     @php($i = 1)
-                    @foreach($shopcartdata as $key)
+                    @foreach($shopcartdata['list'] as $key)
                     {{-- @php(print_r($shopcartdata)) --}}
                         <tr>
                             <th scope="row">{{ $i++ }}</th>
@@ -39,9 +39,7 @@
                     @endforeach
                 </tbody>
             </table>
-            @foreach($shopcartdata as $k)
-                <h1>總共: {{ $k->total_price }} 元</h1>
-            @endforeach
+            <h1>總共: {{ $shopcartdata['total_cost'] }} 元</h1>
 
         @else
             <div class="jumbotron jumbotron-fluid">
