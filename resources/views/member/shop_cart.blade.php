@@ -18,28 +18,29 @@
 
                 <tbody>
                     @php($i = 1)
-                    @foreach($shopcartdata as $key)
+                    @foreach($shopcartdata['list'] as $key)
                     {{-- @php(print_r($shopcartdata)) --}}
                         <tr>
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $key->name  }}</td>
                             <td>$ {{ $key->price }}</td>
                             <td>
-                                <input type="number" min="1" max="{{ $key->amount}}" value="{{ $key->total_purchase_item }}">
+                                <input type="number" min="1" max="{{ $key->amount }}" value="{{ $key->total_purchase_item }}">
                             </td>
-                            {{-- <td>{{ Form::selectRange('number', $key->total_purchase_item, 20) }}</td> --}}
                             <td>
                                 {!! Form::open(['action'=>['ShopcartController@destroy',$key->id],'method'=>'POST','class'=>'pull-right']) !!}
+                                @csrf
                                 {{ Form::hidden('_method','DELETE') }}
                                 {{ Form::submit('刪除',['class'=>'btn btn-danger btn-sm']) }}
                                 {!! Form::close() !!}
                             </td>
-
                         </tr>
+                        
                     @endforeach
                 </tbody>
-
             </table>
+            <h1>總共: {{ $shopcartdata['total_cost'] }} 元</h1>
+
         @else
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">

@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
-
 // 對應model
 use App\Merchandise;
 use App\Shopcart;
@@ -17,11 +16,21 @@ use Illuminate\Support\Facades\Auth;
 
 class ShopcartController extends Controller
 {
-    // /**
-    //  * Display a listing of the resource.
-    //  *
-    //  * @return \Illuminate\Http\Response
-    //  */
+    /**
+     * Create a new controller instance.
+     *
+     * @return void
+     */
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+    
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     // public function index()
     // {
     //     if(Auth::check()){
@@ -58,9 +67,11 @@ class ShopcartController extends Controller
                 'purchase_number' => 'required',
                 'product_id' => 'required'
             ]);
-            // 取得點選商品頁的商品id
-            $merchandise_data = DB::table('merchandises')->find($data['product_id']);
 
+            // 取得點選商品頁的商品id
+            // $merchandise_data = DB::table('merchandises')->find($data['product_id']);
+            $merchandise_data = Merchandise::find($data['product_id']);
+ 
             // 年月日
             $now = new DateTime();
             
@@ -96,20 +107,27 @@ class ShopcartController extends Controller
     public function show($id)
     {
         $user = Auth::user();
-        // $shopCart = DB::table('shopcarts')->where('userid',$user->id)->select('status')->first();
 
         if(Auth::check() AND $user->id == $id ) {
             // 取得登入會員購物車內的資料
-            $member_cartData = DB::table('shopcarts AS cart')
+            $member_cartData = DB::table('shopcarts AS cart',)
                             ->join('merchandises AS product', function ($join) use ($id) {
                                 $join->on('cart.merchandise_id', '=', 'product.id')
                                     ->where('cart.userid', '=',$id)
                                     ->orderBy('cart.created_at', 'desc');
                             })
                             ->get();
-            // $sum_price = DB::table('shopcarts');
+            // 計算購物車總金額
+            $total = DB::table('shopcarts AS cart')->where('cart.userid', '=',$id)->sum('total_price');
 
-            return view('member.shop_cart')->with('shopcartdata',$member_cartData);
+            $shopcartdata = [
+                'list' => $member_cartData,
+                'total_cost' => $total
+            ];
+
+            // return view('member.shop_cart')->with('shopcartdata',$member_cartData)->with('total_cost',$total);
+            return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
+
         }
         return view('auth.login');
     }

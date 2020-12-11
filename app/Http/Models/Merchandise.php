@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Merchandise extends Model
 {
     //
-    protected $table = 'mechandises';
+    protected $table = 'merchandises';
 
     protected $fillable = [
         'name','price','image_path','amount'
