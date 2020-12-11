@@ -39,8 +39,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <h1>總共: {{ $shopcartdata['total_cost'] }} 元</h1>
+            <h1 style="text-align:right">總共: {{ $shopcartdata['total_cost'] }} 元</h1>
 
+            <button type="button" class="btn btn-success"><a href="/cart/checkout_{{Auth::user()->id}}">結帳</a></button>
+            @csrf
         @else
             <div class="jumbotron jumbotron-fluid">
                 <div class="container">

@@ -125,8 +125,8 @@ class ShopcartController extends Controller
                 'total_cost' => $total
             ];
 
-            // return view('member.shop_cart')->with('shopcartdata',$member_cartData)->with('total_cost',$total);
-            return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
+            // return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
+            return view('member.shop_cart',compact('shopcartdata'));
 
         }
         return view('auth.login');
