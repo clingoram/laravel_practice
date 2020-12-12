@@ -140,7 +140,13 @@ class ShopcartController extends Controller
      */
     public function edit($id)
     {
-        //
+        $cart = Shopcart::find($id);
+
+        // 改url $cart id
+        if(!isset($cart) OR Auth::user()->id !== $cart->userid){
+            return redirect('/')->with('error','Error!!The permission is denied.');
+        }
+        return view('/');
     }
 
     /**
@@ -152,7 +158,8 @@ class ShopcartController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // user 更改選購的商品數量
+        $user = Auth::user();
     }
 
     /**

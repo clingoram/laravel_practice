@@ -1,9 +1,9 @@
-{{-- 產品管理頁面(上傳) --}}
+{{-- 產品管理頁面(更新、刪除) --}}
 @extends('layouts.app')
 @section('content')
 <div class="container">
 
-    <h1>新增商品</h1>
+    <h1>編輯商品</h1>
 
     {{-- <div class="col-sm-9"> --}}
         
