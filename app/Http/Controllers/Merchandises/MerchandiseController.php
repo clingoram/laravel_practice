@@ -21,10 +21,10 @@ class MerchandiseController extends Controller
      *
      * @return void
      */
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
+    // public function __construct()
+    // {
+    //     $this->middleware('auth');
+    // }
 
 
     // home
@@ -34,7 +34,7 @@ class MerchandiseController extends Controller
         $user = Auth::user();
 
         if(isset(Auth::user()->id) AND $user->role == 'A') {
-            // if admin is login
+            // 登入，導到上傳商品頁面
             return view('product.product_management');
         } else {
             // to login page

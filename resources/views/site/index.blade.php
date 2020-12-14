@@ -2,7 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id='app'></div>
     <div class="container">
 
       @if(count($items) >= 1)
