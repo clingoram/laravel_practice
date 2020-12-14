@@ -17,6 +17,7 @@ Auth::routes();
 
 Route::get('/','PageController@index');
 
+
 Route::resource('product','MerchandiseController');
 Route::resource('cart','ShopcartController');
 

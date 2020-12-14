@@ -1,7 +1,10 @@
 <!-- 購物車 -->
 @extends('layouts.app')
 @section('content')
-    <div class="container">
+    <div class="container" id='app_cart'>
+
+        {{-- <index-component></index-component> --}}
+
         <h6 class="title-canter">購物車</h6>
 
         @if(isset($shopcartdata) AND count($shopcartdata) >= 1)
@@ -39,7 +42,10 @@
                     @endforeach
                 </tbody>
             </table>
-            <h1>總共: {{ $shopcartdata['total_cost'] }} 元</h1>
+            <h1 style="text-align:right">總共: {{ $shopcartdata['total_cost'] }} 元</h1>
+
+            {{-- <button type="button" class="btn btn-success"><a href="/cart/checkout_{{Auth::user()->id}}">結帳</a></button> --}}
+            @csrf
 
         @else
             <div class="jumbotron jumbotron-fluid">

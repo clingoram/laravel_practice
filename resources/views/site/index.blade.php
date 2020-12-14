@@ -2,7 +2,6 @@
 @extends('layouts.app')
 
 @section('content')
-    <div id='app'></div>
     <div class="container">
 
       @if(count($items) >= 1)
@@ -23,12 +22,18 @@
                       <p class="card-text">商品數量: {{ $k->amount }}</p>
                     </div>
                   </a>
-                </div>
 
+                </div>
+                @if(Auth::check() AND Auth::user()->role == 'A')
+                    <div class="card">
+                        <div class="card-body">
+                            <a class="nav-link" href="/product/update_{{ $k->id }}">修改商品資訊</a>
+                        </div>
+                    </div>
+                @endif
               </div>
 
             @endforeach
-
         </div>
 
       @else
