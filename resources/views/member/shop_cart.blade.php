@@ -3,7 +3,7 @@
 @section('content')
     <div class="container" id='app_cart'>
 
-        {{-- <index-component></index-component> --}}
+        <index-component></index-component>
 
         <h6 class="title-canter">購物車</h6>
 
