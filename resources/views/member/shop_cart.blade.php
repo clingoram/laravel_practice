@@ -1,9 +1,9 @@
 <!-- 購物車 -->
 @extends('layouts.app')
 @section('content')
-    <div class="container" id='app_cart'>
+    
 
-        <index-component></index-component>
+    <div class="container">
 
         <h6 class="title-canter">購物車</h6>
 
