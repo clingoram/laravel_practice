@@ -10,6 +10,7 @@
     <title>{{ config('app.name', 'Laravel') }}</title>
 
     <!-- Scripts -->
+    {{-- React --}}
     <script src="{{ asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
@@ -22,6 +23,7 @@
 </head>
 <body>
     <div id="app">
+        
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -61,7 +63,7 @@
 
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
-                                <a class="nav-link" href="/cart/{{Auth::user()->id}}">購物車</a>
+                                    <a class="nav-link" href="/cart/{{Auth::user()->id}}">購物車</a>
                                 </li>
                             </ul>
 

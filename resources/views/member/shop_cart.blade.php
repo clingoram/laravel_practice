@@ -1,10 +1,11 @@
 <!-- 購物車 -->
 @extends('layouts.app')
 @section('content')
-    <div class="container" id='app_cart'>
 
-        {{-- <index-component></index-component> --}}
+    <div id="cartlist">
+    </div>
 
+    <div class="container">
         <h6 class="title-canter">購物車</h6>
 
         @if(isset($shopcartdata) AND count($shopcartdata) >= 1)
@@ -22,7 +23,6 @@
                 <tbody>
                     @php($i = 1)
                     @foreach($shopcartdata['list'] as $key)
-                    {{-- @php(print_r($shopcartdata)) --}}
                         <tr>
                             <th scope="row">{{ $i++ }}</th>
                             <td>{{ $key->name  }}</td>
@@ -43,8 +43,6 @@
                 </tbody>
             </table>
             <h1 style="text-align:right">總共: {{ $shopcartdata['total_cost'] }} 元</h1>
-
-            {{-- <button type="button" class="btn btn-success"><a href="/cart/checkout_{{Auth::user()->id}}">結帳</a></button> --}}
             @csrf
 
         @else
@@ -54,6 +52,5 @@
                 </div>
             </div>
         @endif
-
     </div>
 @endsection
