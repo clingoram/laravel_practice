@@ -128,8 +128,8 @@ class ShopcartController extends Controller
             // return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
             return view('member.shop_cart',compact('shopcartdata'));
 
+            // return ShopcartResource::collection($shopcartdata);
             // return $shopcartdata;
-
 
         }
         return view('auth.login');

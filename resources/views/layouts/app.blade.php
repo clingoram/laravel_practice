@@ -9,10 +9,6 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
-    <!-- Scripts -->
-    {{-- React --}}
-    <script src="{{ asset('js/app.js') }}" defer></script>
-
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -64,6 +60,7 @@
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/cart/{{Auth::user()->id}}">購物車</a>
+
                                 </li>
                             </ul>
 
@@ -94,5 +91,10 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- Scripts -->
+    {{-- React --}}
+    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
 </body>
+       
 </html>

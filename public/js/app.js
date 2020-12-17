@@ -1911,9 +1911,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
-    console.log("Component mounted.......");
+    console.log("Component mounted.......And, HI!!");
   }
 });
 
@@ -37509,7 +37512,11 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" })
+  return _c("div", { staticClass: "container" }, [
+    _c("h6", { staticClass: "title-canter" }, [_vm._v("購物車")]),
+    _vm._v(" "),
+    _vm.$shopcartdata >= 1 ? _c("div") : _vm._e()
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
