@@ -19,7 +19,9 @@
 </head>
 <body>
     <div id="app">
-        
+
+        <index-component></index-component>
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -92,9 +94,10 @@
         </main>
     </div>
 
-    <!-- Scripts -->
+        <!-- Scripts -->
     {{-- React --}}
     <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
+
 </body>
-       
+
 </html>

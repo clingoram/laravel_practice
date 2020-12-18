@@ -8,6 +8,14 @@ require('./bootstrap');
 
 window.Vue = require('vue');
 
+// import { library } from '@fortawesome/fontawesome-svg-core';
+// import { faShoppingCart, faFile } from '@fortawesome/free-solid-svg-icons';
+// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+
+// library.add(faShoppingCart, faFile);
+
+// Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -20,7 +28,15 @@ window.Vue = require('vue');
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
 
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
+
+// 首頁
 Vue.component('index-component', require('./components/IndexComponent.vue').default);
+// menu
+Vue.component('menu-component', require('./components/MenuComponent.vue').default);
+// 上傳商品頁面
+Vue.component('upload-component', require('./components/UploadproductComponent.vue').default);
+// 購物車
+Vue.component('shoplist-component', require('./components/ShoplistComponent.vue').default);
 
 
 
@@ -32,5 +48,5 @@ Vue.component('index-component', require('./components/IndexComponent.vue').defa
 
 
 const app = new Vue({
-    el: '#cartlist',
+    el: '#app'
 });

@@ -3,8 +3,7 @@
 @section('content')
 
     <div id="cartlist">
-        <index-component></index-component>
-        
+        <shoplist-component></shoplist-component>
     </div>
 
     <div class="container">

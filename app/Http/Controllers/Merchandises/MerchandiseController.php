@@ -116,10 +116,10 @@ class MerchandiseController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
-    {
+    // public function edit($id)
+    // {
    
-    }
+    // }
 
     
     /**
@@ -130,10 +130,10 @@ class MerchandiseController extends Controller
      * @return \Illuminate\Http\Response
      */
     // 更新商品
-    public function update(Request $request, $id)
-    {
-        // 結帳後，商品數量減少
-    }
+    // public function update(Request $request, $id)
+    // {
+    //     // 結帳後，商品數量減少
+    // }
 
      /**
      * Remove the specified resource from storage.

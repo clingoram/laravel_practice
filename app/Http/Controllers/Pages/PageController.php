@@ -18,7 +18,7 @@ class PageController extends Controller
     {
         $products = DB::table('merchandises')->get();
 
-        return view('site.index',['items'=> $products]);
+        // return view('site.index',['items'=> $products]);
         // return PageResource::collection($products);
         // return $products;
 
