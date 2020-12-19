@@ -5,14 +5,13 @@
     </div>
   </div> -->
 
-  <div class="card" style="width: 18rem">
-    <div class="card-body">
-      <h5 class="card-title">Card title</h5>
-      <p class="card-text">
-        Some quick example text to build on the card title and make up the bulk
-        of the card's content.
-      </p>
-      <a href="#" class="btn btn-primary">Go somewhere</a>
+  <div class="container">
+    <div v-if="$items >= 1">
+      <div class="row row-cols-1 row-cols-md-3">
+        <ul>
+          <li v-for="(item, index) in list" :key="index">{{ item.name }}</li>
+        </ul>
+      </div>
     </div>
   </div>
 </template>
@@ -21,6 +20,17 @@ export default {
   // 首頁
   mounted() {
     console.log("Index");
+  },
+  data() {
+    return {
+      list: [
+        { name: "Adam", id: 1 },
+        { name: "Jack", id: 2 },
+        { name: "Candy", id: 3 },
+        { name: "Louis", id: 4 },
+        { name: "Lurry", id: 5 },
+      ],
+    };
   },
 };
 </script>

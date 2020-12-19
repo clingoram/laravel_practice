@@ -32,7 +32,7 @@ window.Vue = require('vue');
 // 首頁
 Vue.component('index-component', require('./components/IndexComponent.vue').default);
 // menu
-Vue.component('menu-component', require('./components/MenuComponent.vue').default);
+Vue.component('header-component', require('./components/HeaderComponent.vue').default);
 // 上傳商品頁面
 Vue.component('upload-component', require('./components/UploadproductComponent.vue').default);
 // 購物車
@@ -48,5 +48,5 @@ Vue.component('shoplist-component', require('./components/ShoplistComponent.vue'
 
 
 const app = new Vue({
-    el: '#app'
+    el: '#appdata'
 });

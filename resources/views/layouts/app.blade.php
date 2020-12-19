@@ -9,6 +9,10 @@
 
     <title>{{ config('app.name', 'Laravel') }}</title>
 
+    <!-- Scripts -->
+    {{-- React --}}
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
@@ -18,10 +22,13 @@
 
 </head>
 <body>
-    <div id="app">
-
-        <index-component></index-component>
-
+    <div class="container">
+        <div id="appdata">
+            <header-component></header-component>
+            <index-component></index-component>
+        </div>
+    </div>
+    {{-- <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -92,11 +99,8 @@
         <main class="py-4">
             @yield('content')
         </main>
-    </div>
+    </div> --}}
 
-        <!-- Scripts -->
-    {{-- React --}}
-    <script type="text/javascript" src="{{ asset('js/app.js') }}" defer></script>
 
 </body>
 
