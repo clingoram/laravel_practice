@@ -18,10 +18,14 @@
 <script>
 export default {
   // 首頁
-  mounted() {
-    console.log("Index");
+  // mounted() {
+  //   console.log("Index");
+  // },
+  props: {
+    id: Number,
+    name: String,
   },
-  data() {
+  data: function () {
     return {
       list: [
         { name: "Adam", id: 1 },
@@ -31,6 +35,22 @@ export default {
         { name: "Lurry", id: 5 },
       ],
     };
+  },
+  mounted() {
+    // like ajax
+    axios
+      .get("api/home")
+      .then(function (response) {
+        // handle success
+        console.log(response);
+      })
+      .catch(function (error) {
+        // handle error
+        console.log(error);
+      })
+      .then(function () {
+        // always executed
+      });
   },
 };
 </script>

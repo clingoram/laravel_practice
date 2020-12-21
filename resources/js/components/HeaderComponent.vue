@@ -1,9 +1,5 @@
 <template>
-  <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-    <div class="container">
-      <main class="py-4"></main>
-    </div>
-  </nav>
+  <div></div>
 </template>
 <script>
 // import UploadproductComponent from "./uploadproductcomponent";

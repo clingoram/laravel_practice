@@ -29,9 +29,9 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 // 首頁
 Route::get('/home','PageController@index');
 
-// Route::prefix('/product')->group(function() {
-//     Route::get('/','MerchandiseController@index');
-// });
+Route::prefix('/product')->group(function() {
+    Route::get('/','MerchandiseController@index');
+});
 
 // Route::get('cart',[ShopcartController::class,'show']);
 // Route::get('cart' ,'App\Http\Controllers\Shopcarts\ShopcartController@show');
