@@ -1925,45 +1925,70 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // 首頁
-  // mounted() {
-  //   console.log("Index");
+  // props: {
+  //   id: Number,
+  //   name: String,
   // },
-  props: {
-    id: Number,
-    name: String
-  },
+  props: ["list"],
   data: function data() {
     return {
-      list: [{
-        name: "Adam",
-        id: 1
-      }, {
-        name: "Jack",
-        id: 2
-      }, {
-        name: "Candy",
-        id: 3
-      }, {
-        name: "Louis",
-        id: 4
-      }, {
-        name: "Lurry",
-        id: 5
-      }]
+      items: "" // list: [
+      //   { name: "Adam", id: 1 },
+      //   { name: "Jack", id: 2 },
+      //   { name: "Candy", id: 3 },
+      //   { name: "Louis", id: 4 },
+      //   { name: "Lurry", id: 5 },
+      // ],
+
     };
   },
   mounted: function mounted() {
-    // like ajax
-    axios.get("api/home").then(function (response) {
-      // handle success
-      console.log(response);
-    })["catch"](function (error) {
-      // handle error
-      console.log(error);
-    }).then(function () {// always executed
-    });
+    this.loadProducts(); // like ajax
+    // axios
+    //   .get("/api/home")
+    //   .then(function (response) {
+    //     // handle success
+    //     console.log("success");
+    //     console.log(response);
+    //   })
+    //   .catch(function (error) {
+    //     // handle error
+    //     console.log("error");
+    //     console.log(error);
+    //   })
+    //   .then(function () {
+    //     // always executed
+    //   });
+  },
+  methods: {
+    loadProducts: function loadProducts() {
+      var _this = this;
+
+      // load API
+      axios.get("/api/home").then(function (response) {
+        _this.items = response.data;
+      })["catch"](function (error) {
+        console.log(error);
+      }); // .then(function (response) {
+      //   // handle success
+      //   console.log("success");
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   // handle error
+      //   console.log("error");
+      //   console.log(error);
+      // });
+    }
   }
 });
 
@@ -37609,7 +37634,7 @@ var render = function() {
           _c("div", { staticClass: "row row-cols-1 row-cols-md-3" }, [
             _c(
               "ul",
-              _vm._l(_vm.list, function(item, index) {
+              _vm._l(_vm.items, function(item, index) {
                 return _c("li", { key: index }, [_vm._v(_vm._s(item.name))])
               }),
               0

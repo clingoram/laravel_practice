@@ -27,16 +27,20 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 });
 
 // 首頁
-Route::get('/home','PageController@index');
+// Route::get('/home','PageController@index');
+Route::get('/home',[PageController::class,'index']);
 
+
+// 上傳商品頁面
 Route::prefix('/product')->group(function() {
     Route::get('/','MerchandiseController@index');
+    Route::post('/store','MerchandiseController@store');
 });
 
 // Route::get('cart',[ShopcartController::class,'show']);
 // Route::get('cart' ,'App\Http\Controllers\Shopcarts\ShopcartController@show');
 
-
+// 購物車
 Route::prefix('/cart')->group(function() {
     Route::get('/{id}',[ShopcartController::class,'show']);
     // Route::get('/{id}','ShopcartController@show');
