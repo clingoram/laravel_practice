@@ -23,11 +23,11 @@ class PageController extends Controller
         // $collection = PageResource::collection($products);
         // return view('site.index',['items'=> $collection]);
 
-        return view('site.index',['items'=> $products]);
+        // return view('site.index',['items'=> $products]);
 
         // return $products;
 
-        // return PageResource::collection($products);
+        return PageResource::collection($products);
 
     }
 }

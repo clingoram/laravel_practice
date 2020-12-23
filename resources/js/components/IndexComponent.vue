@@ -1,24 +1,28 @@
 <template>
-  <!-- <div class="container">
-    <div v-if="count($items) >= 1">
-      <div class="row row-cols-1 row-cols-md-3"></div>
-    </div>
-  </div> -->
-
-  <!-- <div class="container">
-    @if(count($items) >= 1)
-    <div class="row row-cols-1 row-cols-md-3"></div>
-  </div> -->
   <div class="container">
-    <div v-if="$items >= 1">
-      <div class="row row-cols-1 row-cols-md-3">
-        <ul>
-          <!-- <li v-for="(item, index) in items" :key="index">{{ item.name }}</li> -->
-          <li v-for="(item, index) in items" :key="index">{{ item.name }}</li>
-
-          <!-- <li :list="list"></li> -->
-        </ul>
+    <div class="row row-cols-1 row-cols-md-3">
+      <div v-if="items_number">
+        <div v-for="(item, index) in items" :key="index">
+          <div class="col mb-4">
+            <div class="card">
+              <!-- <a href="/api/product/{{ item.id }}">
+                <div v-if="item.image_path != 'no_image.jpeg'">
+                  <img
+                    style="width: 200px"
+                    src="/storage/images/{{ item.image_path }}"
+                  />
+                </div> -->
+              <div class="card-body">
+                <h5 class="card-title">{{ item.name }}</h5>
+                <p class="card-text">${{ item.price }}</p>
+                <p class="card-text">商品數量: {{ item.amount }}</p>
+              </div>
+              <!-- </a> -->
+            </div>
+          </div>
+        </div>
       </div>
+      <div v-else>NO Data</div>
     </div>
   </div>
 </template>
@@ -26,13 +30,13 @@
 export default {
   // 首頁
   // props: {
-  //   id: Number,
-  //   name: String,
+  //   items_number: Number,
   // },
-  props: ["list"],
   data: function () {
     return {
-      items: "",
+      items_number: true,
+      items: [],
+
       // list: [
       //   { name: "Adam", id: 1 },
       //   { name: "Jack", id: 2 },
@@ -42,25 +46,9 @@ export default {
       // ],
     };
   },
+  // don't delete!!
   mounted() {
     this.loadProducts();
-    // like ajax
-
-    // axios
-    //   .get("/api/home")
-    //   .then(function (response) {
-    //     // handle success
-    //     console.log("success");
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     // handle error
-    //     console.log("error");
-    //     console.log(error);
-    //   })
-    //   .then(function () {
-    //     // always executed
-    //   });
   },
   methods: {
     loadProducts: function () {
@@ -69,20 +57,11 @@ export default {
         .get("/api/home")
         .then((response) => {
           this.items = response.data;
+          console.log(response);
         })
         .catch((error) => {
           console.log(error);
         });
-      // .then(function (response) {
-      //   // handle success
-      //   console.log("success");
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   // handle error
-      //   console.log("error");
-      //   console.log(error);
-      // });
     },
   },
 };

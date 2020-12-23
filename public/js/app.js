@@ -1932,16 +1932,19 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   // 首頁
   // props: {
-  //   id: Number,
-  //   name: String,
+  //   items_number: Number,
   // },
-  props: ["list"],
   data: function data() {
     return {
-      items: "" // list: [
+      items_number: true,
+      items: [] // list: [
       //   { name: "Adam", id: 1 },
       //   { name: "Jack", id: 2 },
       //   { name: "Candy", id: 3 },
@@ -1951,23 +1954,9 @@ __webpack_require__.r(__webpack_exports__);
 
     };
   },
+  // don't delete!!
   mounted: function mounted() {
-    this.loadProducts(); // like ajax
-    // axios
-    //   .get("/api/home")
-    //   .then(function (response) {
-    //     // handle success
-    //     console.log("success");
-    //     console.log(response);
-    //   })
-    //   .catch(function (error) {
-    //     // handle error
-    //     console.log("error");
-    //     console.log(error);
-    //   })
-    //   .then(function () {
-    //     // always executed
-    //   });
+    this.loadProducts();
   },
   methods: {
     loadProducts: function loadProducts() {
@@ -1976,18 +1965,10 @@ __webpack_require__.r(__webpack_exports__);
       // load API
       axios.get("/api/home").then(function (response) {
         _this.items = response.data;
+        console.log(response);
       })["catch"](function (error) {
         console.log(error);
-      }); // .then(function (response) {
-      //   // handle success
-      //   console.log("success");
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   // handle error
-      //   console.log("error");
-      //   console.log(error);
-      // });
+      });
     }
   }
 });
@@ -2010,8 +1991,49 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
+  // 首頁
+  // props: {
+  //   items_number: Number,
+  // },
+  data: function data() {
+    return {
+      items_number: true,
+      items: [] // list: [
+      //   { name: "Adam", id: 1 },
+      //   { name: "Jack", id: 2 },
+      //   { name: "Candy", id: 3 },
+      //   { name: "Louis", id: 4 },
+      //   { name: "Lurry", id: 5 },
+      // ],
+
+    };
+  },
+  // don't delete!!
   mounted: function mounted() {
-    console.log("Component mounted.......And, HI!!");
+    this.loadProducts();
+    console.log("je");
+  },
+  methods: {
+    loadProducts: function loadProducts() {
+      var _this = this;
+
+      // load API
+      axios.post("/api/cart").then(function (response) {
+        _this.items = response.data;
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      }); // .then(function (response) {
+      //   // handle success
+      //   console.log("success");
+      //   console.log(response);
+      // })
+      // .catch(function (error) {
+      //   // handle error
+      //   console.log("error");
+      //   console.log(error);
+      // });
+    }
   }
 });
 
@@ -37629,19 +37651,35 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "container" }, [
-    _vm.$items >= 1
-      ? _c("div", [
-          _c("div", { staticClass: "row row-cols-1 row-cols-md-3" }, [
-            _c(
-              "ul",
-              _vm._l(_vm.items, function(item, index) {
-                return _c("li", { key: index }, [_vm._v(_vm._s(item.name))])
-              }),
-              0
-            )
-          ])
-        ])
-      : _vm._e()
+    _c("div", { staticClass: "row row-cols-1 row-cols-md-3" }, [
+      _vm.items_number
+        ? _c(
+            "div",
+            _vm._l(_vm.items, function(item, index) {
+              return _c("div", { key: index }, [
+                _c("div", { staticClass: "col mb-4" }, [
+                  _c("div", { staticClass: "card" }, [
+                    _c("div", { staticClass: "card-body" }, [
+                      _c("h5", { staticClass: "card-title" }, [
+                        _vm._v(_vm._s(item.name))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("$" + _vm._s(item.price))
+                      ]),
+                      _vm._v(" "),
+                      _c("p", { staticClass: "card-text" }, [
+                        _vm._v("商品數量: " + _vm._s(item.amount))
+                      ])
+                    ])
+                  ])
+                ])
+              ])
+            }),
+            0
+          )
+        : _c("div", [_vm._v("NO Data")])
+    ])
   ])
 }
 var staticRenderFns = []

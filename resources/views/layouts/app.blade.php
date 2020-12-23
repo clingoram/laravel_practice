@@ -22,14 +22,8 @@
 
 </head>
 <body>
-    {{-- <div class="container">
-        <div id="appdata">
-            <header-component></header-component>
-            <index-component></index-component>
-        </div>
-    </div> --}}
     <div id="appdata">
-        
+
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container">
                 <a class="navbar-brand" href="{{ url('/') }}">
@@ -100,6 +94,9 @@
         <main class="py-4">
             {{-- @yield('content') --}}
             <index-component></index-component>
+            @if(Auth::check())
+                <shoplist-component></shoplist-component>
+            @endif
         </main>
     </div>
 
