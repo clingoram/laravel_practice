@@ -15,13 +15,11 @@ use Illuminate\Support\Facades\Route;
 
 Auth::routes();
 
-// Route::get('/','PageController@index');
+Route::get('/','PageController@index');
 
 
-// Route::resource('product','MerchandiseController');
-// // Route::resource('cart','ShopcartController');
+Route::resource('product','MerchandiseController');
+Route::resource('cart','ShopcartController');
 
-// // home
-// Route::get('/home', 'HomeController@index')->name('home');
-
-// Route::view('/home','site.index');
+// home
+Route::get('/home', 'HomeController@index')->name('home');

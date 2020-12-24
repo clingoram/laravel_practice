@@ -2,10 +2,6 @@
 @extends('layouts.app')
 @section('content')
 
-    {{-- <div id="cartlist"> --}}
-        {{-- <shoplist-component></shoplist-component> --}}
-    {{-- </div> --}}
-
     <div class="container">
         <h6 class="title-canter">購物車</h6>
 

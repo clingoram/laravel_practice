@@ -64,7 +64,6 @@
                             <ul class="nav nav-pills">
                                 <li class="nav-item">
                                     <a class="nav-link" href="/cart/{{Auth::user()->id}}">購物車</a>
-
                                 </li>
                             </ul>
 
@@ -92,11 +91,11 @@
         </nav>
 
         <main class="py-4">
-            {{-- @yield('content') --}}
-            <index-component></index-component>
-            @if(Auth::check())
+            @yield('content')
+            {{-- <index-component></index-component> --}}
+            {{-- @if(Auth::check())
                 <shoplist-component></shoplist-component>
-            @endif
+            @endif --}}
         </main>
     </div>
 

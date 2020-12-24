@@ -37,7 +37,7 @@ Route::prefix('/product')->group(function() {
     Route::post('/store','MerchandiseController@store');
 });
 
-// Route::get('cart',[ShopcartController::class,'show']);
+Route::get('cart',[ShopcartController::class,'show']);
 // Route::get('cart' ,'App\Http\Controllers\Shopcarts\ShopcartController@show');
 
 // 購物車

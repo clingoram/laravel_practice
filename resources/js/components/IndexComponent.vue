@@ -5,19 +5,19 @@
         <div v-for="(item, index) in items" :key="index">
           <div class="col mb-4">
             <div class="card">
-              <!-- <a href="/api/product/{{ item.id }}">
+              <a :href="'/product/' + item.id">
                 <div v-if="item.image_path != 'no_image.jpeg'">
                   <img
                     style="width: 200px"
-                    src="/storage/images/{{ item.image_path }}"
+                    :src="'/storage/images/' + item.image_path"
                   />
-                </div> -->
-              <div class="card-body">
-                <h5 class="card-title">{{ item.name }}</h5>
-                <p class="card-text">${{ item.price }}</p>
-                <p class="card-text">商品數量: {{ item.amount }}</p>
-              </div>
-              <!-- </a> -->
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{ item.name }}</h5>
+                  <p class="card-text">${{ item.price }}</p>
+                  <p class="card-text">商品數量: {{ item.amount }}</p>
+                </div>
+              </a>
             </div>
           </div>
         </div>

@@ -37659,17 +37659,30 @@ var render = function() {
               return _c("div", { key: index }, [
                 _c("div", { staticClass: "col mb-4" }, [
                   _c("div", { staticClass: "card" }, [
-                    _c("div", { staticClass: "card-body" }, [
-                      _c("h5", { staticClass: "card-title" }, [
-                        _vm._v(_vm._s(item.name))
-                      ]),
+                    _c("a", { attrs: { href: "/product/" + item.id } }, [
+                      item.image_path != "no_image.jpeg"
+                        ? _c("div", [
+                            _c("img", {
+                              staticStyle: { width: "200px" },
+                              attrs: {
+                                src: "/storage/images/" + item.image_path
+                              }
+                            })
+                          ])
+                        : _vm._e(),
                       _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v("$" + _vm._s(item.price))
-                      ]),
-                      _vm._v(" "),
-                      _c("p", { staticClass: "card-text" }, [
-                        _vm._v("商品數量: " + _vm._s(item.amount))
+                      _c("div", { staticClass: "card-body" }, [
+                        _c("h5", { staticClass: "card-title" }, [
+                          _vm._v(_vm._s(item.name))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v("$" + _vm._s(item.price))
+                        ]),
+                        _vm._v(" "),
+                        _c("p", { staticClass: "card-text" }, [
+                          _vm._v("商品數量: " + _vm._s(item.amount))
+                        ])
                       ])
                     ])
                   ])
