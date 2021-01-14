@@ -1,6 +1,30 @@
 ## Laravel購物網站
 使用Laradock建置Laravel環境，MySQL
 
+![Cart](/project_images/home.jpg)
+
+<h4>登入</h4>
+
+![cart](/project_images/login.jpg)
+
+<p>依登入使用者身分不同做顯示頁面的區分</p>
+
+![cart](/project_images/登入成功-不同使用者.jpg)
+![cart](/project_images/登入成功.jpg)
+
+<h4>註冊</h4>
+
+![cart](/project_images/register.jpg)
+
+<h4>上傳商品</h4>
+
+![cart](/project_images/upload.jpg)
+
+<h4>結帳</h4>
+<p>針對不同帳號，計算各自購物車總金額</p>
+
+![cart](/project_images/cart.jpg)
+
 <hr>
 <h5>遇到 商品圖片無法顯示(404)，但path是正確的。</h5>
 <p>
