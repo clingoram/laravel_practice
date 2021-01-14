@@ -35,7 +35,17 @@ class ShopcartController extends Controller
     // {
     //     if(Auth::check()){
     //         $user = Auth::user();
-    //         return view('member.shop_cart',['member'=> $user->id]);
+    //         // return view('member.shop_cart',['member'=> $user->id]);
+
+    //         // 取得登入會員購物車內的資料
+    //         $member_cartData = DB::table('shopcarts AS cart',)
+    //                         ->join('merchandises AS product', function ($join) use ($id) {
+    //                             $join->on('cart.merchandise_id', '=', 'product.id')
+    //                                 ->where('cart.userid', '=',$user->id)
+    //                                 ->orderBy('cart.created_at', 'desc');
+    //                         })
+    //                         ->get();
+    //         return $member_cartData;
     //     }
     // }
 
@@ -44,10 +54,10 @@ class ShopcartController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
-    {
-        //
-    }
+    // public function create()
+    // {
+    //     //
+    // }
 
     /**
      * Store a newly created resource in storage.
@@ -128,8 +138,8 @@ class ShopcartController extends Controller
             // return view('member.shop_cart')->with('shopcartdata',$shopcartdata);
             return view('member.shop_cart',compact('shopcartdata'));
 
+            // return ShopcartResource::collection($shopcartdata);
             // return $shopcartdata;
-
 
         }
         return view('auth.login');

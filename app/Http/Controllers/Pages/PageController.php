@@ -10,6 +10,8 @@ use Illuminate\Http\Request;
 // DB
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+// resources
+use App\Http\Resources\PageResource;
 
 class PageController extends Controller
 {
@@ -18,6 +20,14 @@ class PageController extends Controller
     {
         $products = DB::table('merchandises')->get();
 
+        // $collection = PageResource::collection($products);
+        // return view('site.index',['items'=> $collection]);
+
         return view('site.index',['items'=> $products]);
+
+        // return $products;
+
+        // return PageResource::collection($products);
+
     }
 }
