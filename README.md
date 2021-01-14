@@ -8,6 +8,7 @@
 ![cart](/project_images/login.jpg)
 
 <p>依登入使用者身分不同做顯示頁面的區分</p>
+<p>不同處:是否有顯示上架頁面<p>
 
 ![cart](/project_images/登入成功-不同使用者.jpg)
 ![cart](/project_images/登入成功.jpg)
