@@ -1,8 +1,6 @@
 <template>
-  <div class="container">
-    <h6 class="title-canter">購物車</h6>
-    <div></div>
-  </div>
+  <!-- 首頁，載入所有商品(圖片+名稱+價格) -->
+  <div class="container"></div>
 </template>
 <script>
 export default {
@@ -24,16 +22,15 @@ export default {
       // ],
     };
   },
-  // don't delete!!
   mounted() {
-    this.loadProducts();
-    console.log("je");
+    // this.loadProducts();
   },
   methods: {
+    // 載入所有商品
     loadProducts: function () {
       // load API
       axios
-        .post("/api/cart")
+        .get("/api/shop")
         .then((response) => {
           this.items = response.data;
           console.log(response);
@@ -41,17 +38,6 @@ export default {
         .catch((error) => {
           console.log(error);
         });
-
-      // .then(function (response) {
-      //   // handle success
-      //   console.log("success");
-      //   console.log(response);
-      // })
-      // .catch(function (error) {
-      //   // handle error
-      //   console.log("error");
-      //   console.log(error);
-      // });
     },
   },
 };

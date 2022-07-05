@@ -15,7 +15,7 @@ class EditForeignToShopcarts extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::table('shopcarts', function (Blueprint $table) {
-            $table->foreign('merchandise_id')->references('id')->on('merchandises')->onUpdate('cascade');
+            $table->foreign('product_id')->references('id')->on('products')->onUpdate('cascade');
         });
         Schema::enableForeignKeyConstraints();
     }
@@ -29,7 +29,7 @@ class EditForeignToShopcarts extends Migration
     {
         Schema::disableForeignKeyConstraints();
         Schema::table('shopcarts', function (Blueprint $table) {
-            $table->dropForeign(['merchandise_id']);
+            $table->dropForeign(['product_id']);
         });
         Schema::enableForeignKeyConstraints();
     }

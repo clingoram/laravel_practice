@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+// use Illuminate\Support\Facades\Auth;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,13 +14,20 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/','PageController@index');
+// Route::get('/', 'PageController@index');
 
 
-Route::resource('product','MerchandiseController');
-Route::resource('cart','ShopcartController');
+// Route::resource('product', 'ProductsController');
+// Route::resource('cart', 'ShopcartController');
 
-// home
-Route::get('/home', 'HomeController@index')->name('home');
+// // home
+// Route::get('/home', 'HomeController@index')->name('home');
+
+Route::get('/', function () {
+  // 引導至views/index.blade
+  return view('index');
+});
+
+// Route::view('/welcome', 'welcome');

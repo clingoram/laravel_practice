@@ -3,12 +3,9 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
-// namespace App\Http\Controllers;
-// use App\Http\Controllers\Shopcarts\ShopcartController;
-// use App\ShopcartController;
-
 use App\Http\Controllers\ShopcartController;
 use App\Http\Controllers\PageController;
+use App\Http\Controllers\ProductsController;
 // use Illuminate\Support\Facades\Auth;
 
 /*
@@ -22,29 +19,34 @@ use App\Http\Controllers\PageController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
-// 首頁
-// Route::get('/home','PageController@index');
-Route::get('/home',[PageController::class,'index']);
+// // 首頁
+// // Route::get('/home','PageController@index');
+// Route::get('/home', [PageController::class, 'index']);
 
 
-// 上傳商品頁面
-Route::prefix('/product')->group(function() {
-    Route::get('/','MerchandiseController@index');
-    Route::post('/store','MerchandiseController@store');
-});
+// // 上傳商品頁面
+// Route::prefix('/product')->group(function () {
+//     Route::get('/', 'ProductsController@index');
+//     Route::post('/store', 'ProductsController@store');
+// });
 
-Route::get('cart',[ShopcartController::class,'show']);
-// Route::get('cart' ,'App\Http\Controllers\Shopcarts\ShopcartController@show');
+// Route::get('cart', [ShopcartController::class, 'show']);
+// // Route::get('cart' ,'App\Http\Controllers\Shopcarts\ShopcartController@show');
 
-// 購物車
-Route::prefix('/cart')->group(function() {
-    Route::get('/{id}',[ShopcartController::class,'show']);
-    // Route::get('/{id}','ShopcartController@show');
-    Route::post('/store',[ShopcartController::class,'store']);
-    // Route::put('/{id}',[ShopcartController::class,'update']);
-    Route::post('/{id}',[ShopcartController::class,'destory']);
+// // 購物車
+// Route::prefix('/cart')->group(function () {
+//     Route::get('/{id}', [ShopcartController::class, 'show']);
+//     // Route::get('/{id}','ShopcartController@show');
+//     Route::post('/store', [ShopcartController::class, 'store']);
+//     // Route::put('/{id}',[ShopcartController::class,'update']);
+//     Route::post('/{id}', [ShopcartController::class, 'destory']);
+// });
+
+
+Route::prefix('/shop')->group(function () {
+    Route::get('', [ProductsController::class, 'index']);
 });

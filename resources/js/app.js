@@ -6,15 +6,20 @@
 
 require('./bootstrap');
 
-window.Vue = require('vue');
+import Vue from 'vue';
+// window.Vue = require('vue');
+window.Vue = require('vue').default;
 
-// import { library } from '@fortawesome/fontawesome-svg-core';
-// import { faShoppingCart, faFile } from '@fortawesome/free-solid-svg-icons';
-// import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { NavbarPlugin } from 'bootstrap-vue';
+import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+// Vue.use(FontAwesomeIcon);
+Vue.use(NavbarPlugin);
 
-// library.add(faShoppingCart, faFile);
+library.add(faShoppingCart, faSearch);
 
-// Vue.component('font-awesome-icon', FontAwesomeIcon);
+Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 /**
  * The following block of code may be used to automatically register your
@@ -30,13 +35,14 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 
 // 首頁
-Vue.component('index-component', require('./components/IndexComponent.vue').default);
+Vue.component('index-component', require('./components/Index.vue').default);
 // menu
-// Vue.component('header-component', require('./components/HeaderComponent.vue').default);
+Vue.component('header-component', require('./components/Header.vue').default);
 // 上傳商品頁面
-Vue.component('upload-component', require('./components/UploadproductComponent.vue').default);
+// Vue.component('upload-component', require('./components/Uploadproduct.vue').default);
 // 購物車
-Vue.component('shoplist-component', require('./components/ShoplistComponent.vue').default);
+// Vue.component('shoplist-component', require('./components/Shoplist.vue').default);
+
 
 
 /**
@@ -46,5 +52,5 @@ Vue.component('shoplist-component', require('./components/ShoplistComponent.vue'
  */
 
 const app = new Vue({
-    el: '#appdata',
+    el: '#app',
 });

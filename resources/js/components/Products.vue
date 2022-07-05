@@ -1,4 +1,5 @@
 <template>
+  <!-- 單一商品頁面 -->
   <div class="container">
     <div class="row row-cols-1 row-cols-md-3">
       <div v-if="items_number">
@@ -46,15 +47,15 @@ export default {
       // ],
     };
   },
-  // don't delete!!
   mounted() {
-    this.loadProducts();
+    // this.loadProducts();
   },
   methods: {
+    // 載入單一商品
     loadProducts: function () {
       // load API
       axios
-        .get("/api/home")
+        .get("/api/shop")
         .then((response) => {
           this.items = response.data;
           console.log(response);

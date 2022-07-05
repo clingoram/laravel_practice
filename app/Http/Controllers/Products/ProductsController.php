@@ -6,7 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // 對應model
-use App\Merchandise;
+use App\Products;
 // use App\Auth;
 use DateTime;
 
@@ -33,16 +33,16 @@ class MerchandiseController extends Controller
         // to show all rows of datas from table merchandises in index.blade.php
         $user = Auth::user();
 
-        if(isset(Auth::user()->id) AND $user->role == 'A') {
+        if (isset(Auth::user()->id) and $user->role == 'A') {
             // 登入，導到上傳商品頁面
             return view('product.product_management');
         } else {
             // to login page
-            return redirect('/')->with('error','Please login.');
+            return redirect('/')->with('error', 'Please login.');
         }
     }
 
-     /**
+    /**
      * Show the form for creating a new resource.
      *
      * @return \Illuminate\Http\Response
@@ -65,37 +65,36 @@ class MerchandiseController extends Controller
     {
         $now = new DateTime();
 
-        $data_validate = $this->validate($request,[
-            'product_name'=> 'required',
-            'price'=>'required',
+        $data_validate = $this->validate($request, [
+            'product_name' => 'required',
+            'price' => 'required',
             'product_number' => 'required',
             'image' => 'image|nullable|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
 
-        if($request->hasFile('image')) {
+        if ($request->hasFile('image')) {
             // 請求取得上傳圖片的原始名稱
             $filename_to_store = $request->file('image')->getClientOriginalName();
             $extension = $request->file('image')->getClientOriginalExtension();
             $file_name = $filename_to_store;
-            $file_path = $request->file('image')->storeAs('public/images',$file_name);
-
+            $file_path = $request->file('image')->storeAs('public/images', $file_name);
         } else {
             $file_name = 'no_image.jpeg';
         }
 
         // insert data into table
-        $insert_merchandise = DB::table('merchandises')->insert([
-            'name'=> $data_validate['product_name'],
-            'price'=> $data_validate['price'],
-            'amount'=> $data_validate['product_number'],
+        $insert_merchandise = DB::table('products')->insert([
+            'name' => $data_validate['product_name'],
+            'price' => $data_validate['price'],
+            'amount' => $data_validate['product_number'],
             'image_path' => $file_name,
             'created_at' => $now
         ]);
 
-        return redirect('/')->with('success','New Product');
+        return redirect('/')->with('success', 'New Product');
     }
 
-     /**
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -104,10 +103,9 @@ class MerchandiseController extends Controller
     public function show($id)
     {
         // 特定商品介紹頁面
-        $get_specific_data = DB::table('merchandises')->find($id);
+        $get_specific_data = DB::table('products')->find($id);
 
-        return view('product.introduction')->with('product',$get_specific_data);
-
+        return view('product.introduction')->with('product', $get_specific_data);
     }
 
     /**
@@ -118,10 +116,10 @@ class MerchandiseController extends Controller
      */
     // public function edit($id)
     // {
-   
+
     // }
 
-    
+
     /**
      * Update the specified resource in storage.
      *
@@ -135,7 +133,7 @@ class MerchandiseController extends Controller
     //     // 結帳後，商品數量減少
     // }
 
-     /**
+    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
@@ -143,6 +141,5 @@ class MerchandiseController extends Controller
      */
     public function destroy($id)
     {
-       
     }
 }

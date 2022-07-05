@@ -4,9 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 
-// 對應model
-// use App\Merchandise;
-
 // DB
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -18,12 +15,13 @@ class PageController extends Controller
     // 首頁
     public function index()
     {
-        $products = DB::table('merchandises')->get();
+        $products = DB::table('products')->get();
 
         // $collection = PageResource::collection($products);
         // return view('site.index',['items'=> $collection]);
 
-        return view('site.index',['items'=> $products]);
+        return view('index');
+
 
         // return $products;
 

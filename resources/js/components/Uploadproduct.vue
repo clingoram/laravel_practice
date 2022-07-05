@@ -1,4 +1,5 @@
 <template>
+  <!-- 賣家上傳商品頁面 -->
   <div>update product</div>
 </template>
 <script>
