@@ -14,7 +14,7 @@ use DateTime;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
 
-class MerchandiseController extends Controller
+class ProductsController extends Controller
 {
     /**
      * Create a new controller instance.

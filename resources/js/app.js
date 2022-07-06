@@ -7,19 +7,22 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-// window.Vue = require('vue');
+import router from './router.js'; // router
+
+import { NavbarPlugin, FormPlugin } from 'bootstrap-vue';
+import { library } from '@fortawesome/fontawesome-svg-core';
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
+import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
+
 window.Vue = require('vue').default;
 
-import { library } from '@fortawesome/fontawesome-svg-core';
-import { NavbarPlugin } from 'bootstrap-vue';
-import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-// Vue.use(FontAwesomeIcon);
+Vue.use(router);
 Vue.use(NavbarPlugin);
-
+Vue.use(FormPlugin);
 library.add(faShoppingCart, faSearch);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 
 /**
  * The following block of code may be used to automatically register your
@@ -36,7 +39,7 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 // 首頁
 Vue.component('index-component', require('./components/Index.vue').default);
-// menu
+// Header
 Vue.component('header-component', require('./components/Header.vue').default);
 // 上傳商品頁面
 // Vue.component('upload-component', require('./components/Uploadproduct.vue').default);
@@ -53,4 +56,5 @@ Vue.component('header-component', require('./components/Header.vue').default);
 
 const app = new Vue({
     el: '#app',
+    router: router,
 });

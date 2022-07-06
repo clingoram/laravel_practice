@@ -1,7 +1,6 @@
 <template>
   <b-navbar toggleable="lg" type="dark" variant="info">
-    <b-navbar-brand href="#">Online Shop</b-navbar-brand>
-
+    <b-navbar-brand href="/">Online Shop</b-navbar-brand>
     <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
 
     <b-collapse id="nav-collapse" is-nav>
@@ -10,10 +9,9 @@
         <b-nav-item href="#" disabled>Disabled</b-nav-item>
       </b-navbar-nav>
 
-      <!-- Right aligned nav items -->
       <b-navbar-nav class="ml-auto">
-        <search-area></search-area>
-        <user-menu></user-menu>
+        <searcharea />
+        <usermenu />
 
         <!-- <b-nav-item-dropdown text="Lang" right>
           <b-dropdown-item href="#">EN</b-dropdown-item>
@@ -26,12 +24,12 @@
   </b-navbar>
 </template>
 <script>
-import SearchArea from "./Search.vue";
-import UserMenu from "./UserMenu.vue";
+import searcharea from "./Search.vue";
+import usermenu from "./UserMenu.vue";
 export default {
   components: {
-    SearchArea,
-    UserMenu,
+    searcharea,
+    usermenu,
   },
   // menu
   mounted() {

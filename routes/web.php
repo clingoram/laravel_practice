@@ -25,9 +25,8 @@ use Illuminate\Support\Facades\Route;
 // // home
 // Route::get('/home', 'HomeController@index')->name('home');
 
-Route::get('/', function () {
+
+Route::get('/{any}', function () {
   // 引導至views/index.blade
   return view('index');
-});
-
-// Route::view('/welcome', 'welcome');
+})->where('any', '^((?!api).)*$'); // '.*'

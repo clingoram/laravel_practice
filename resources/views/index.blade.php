@@ -14,6 +14,7 @@
     <header-component></header-component>
     <!-- content here-->
     <index-component></index-component>
+    <router-view></router-view>
   </div>
   <script src="{{ asset('js/app.js') }}" type="text/javascript"></script>
   {{-- Vue Dev. Tools --}}

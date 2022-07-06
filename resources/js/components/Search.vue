@@ -13,8 +13,8 @@
             aria-label="Search"
           />
           <!-- <button class="btn btn-outline-success" type="submit"> -->
-          <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
-          <font-awesome-icon :icon="['fas', 'search']" class="icon alt" />
+          <!-- <font-awesome-icon icon="fa-solid fa-magnifying-glass" />
+          <font-awesome-icon :icon="['fas', 'search']" class="icon alt" /> -->
           <!-- </button> -->
         </form>
       </div>
