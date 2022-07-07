@@ -2,47 +2,53 @@
   <!-- 註冊頁面 -->
   <div class="container">
     <h1>註冊</h1>
-    <b-form @submit.stop.prevent>
-      <label for="text-password">Password</label>
-      <b-form-input
-        type="password"
-        id="text-password"
-        aria-describedby="password-help-block"
-      ></b-form-input>
-      <b-form-text id="password-help-block">
-        Your password must be 8-20 characters long, contain letters and numbers,
-        and must not contain spaces, special characters, or emoji.
-      </b-form-text>
-    </b-form>
-
-    <!-- <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-2" label="你的帳號" label-for="input-2">
+    <b-form @submit="onSubmit" @reset="onReset" v-if="show">
+      <b-form-group
+        id="registerAccount"
+        label="帳號名稱"
+        label-for="registerAccount"
+        description="請輸入數字0-9及大小寫字母。"
+      >
         <b-form-input
-          id="input-2"
+          id="register_account"
           v-model="form.account"
-          placeholder="輸入帳號"
+          placeholder="帳號"
           required
         ></b-form-input>
       </b-form-group>
 
       <b-form-group
-        id="input-group-1"
+        id="registerEmail"
         label="Email:"
-        label-for="input-1"
+        label-for="registerEmail"
         description="We'll never share your email with anyone else."
       >
         <b-form-input
-          id="input-1"
+          id="register_email"
           v-model="form.email"
           type="email"
-          placeholder="輸入email"
+          placeholder="Email"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
-    </b-form> -->
+      <b-form-group
+        id="registerPassword"
+        label="密碼"
+        label-for="registerPassword"
+        description="請輸入數字0-9及大小寫字母。"
+      >
+        <b-form-input
+          id="register_password"
+          v-model="form.password"
+          placeholder="密碼"
+          required
+        ></b-form-input>
+      </b-form-group>
+
+      <b-button type="submit" variant="outline-primary">送出</b-button>
+      <b-button type="reset" variant="danger">重設</b-button>
+    </b-form>
   </div>
 </template>
 <script>

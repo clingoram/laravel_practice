@@ -1,42 +1,29 @@
 <template>
   <!-- 登入 -->
   <div class="container">
+    <h1>登入</h1>
     <b-form @submit="onSubmit" @reset="onReset" v-if="show">
-      <b-form-group id="input-group-2" label="你的帳號" label-for="input-2">
+      <b-form-group id="loginKey" label="帳號名稱" label-for="loginKey">
         <b-form-input
-          id="input-2"
+          id="login_key"
           v-model="form.account"
-          placeholder="輸入帳號"
+          placeholder="使用者名稱"
           required
         ></b-form-input>
       </b-form-group>
 
-      <!-- <b-form-group
-        id="input-group-1"
-        label="Email:"
-        label-for="input-1"
-        description="We'll never share your email with anyone else."
-      >
+      <b-form-group id="loginPassword" label="密碼" label-for="loginPassword">
         <b-form-input
-          id="input-1"
-          v-model="form.email"
-          type="email"
-          placeholder="輸入email"
-          required
-        ></b-form-input>
-      </b-form-group> -->
-
-      <b-form-group id="password-1" label="你的帳號" label-for="password">
-        <b-form-input
-          id="password"
+          id="login_password"
           v-model="form.password"
-          placeholder="輸入密碼"
+          placeholder="密碼"
           required
         ></b-form-input>
       </b-form-group>
 
-      <b-button type="submit" variant="primary">Submit</b-button>
-      <b-button type="reset" variant="danger">Reset</b-button>
+      <b-button type="submit" variant="outline-primary">送出</b-button>
+      <b-button type="reset" variant="danger">重設</b-button>
+      <b-button variant="dark">忘記密碼?</b-button>
     </b-form>
   </div>
 </template>

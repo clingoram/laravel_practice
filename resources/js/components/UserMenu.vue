@@ -10,7 +10,7 @@
 
     <router-link to="/login">登入</router-link>
     <br />
-    <router-link to="/register">註冊</router-link>
+    <router-link v-bind:to="{ name: 'register-page' }">註冊</router-link>
   </b-nav-item-dropdown>
 </template>
 <script>

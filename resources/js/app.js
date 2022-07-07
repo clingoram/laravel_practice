@@ -7,20 +7,27 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-import router from './router.js'; // router
+// router
+import router from './router.js';
 
-import { NavbarPlugin, FormPlugin } from 'bootstrap-vue';
+window.Vue = require('vue').default;
+
+// bootstrap vue
+import { NavbarPlugin, FormPlugin, FormInputPlugin, ButtonPlugin, FormGroupPlugin } from 'bootstrap-vue';
+// fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
 import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
 
-window.Vue = require('vue').default;
 
 Vue.use(router);
 Vue.use(NavbarPlugin);
 Vue.use(FormPlugin);
-library.add(faShoppingCart, faSearch);
+Vue.use(FormInputPlugin);
+Vue.use(FormGroupPlugin);
+Vue.use(ButtonPlugin);
 
+library.add(faShoppingCart, faSearch);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 
@@ -45,8 +52,6 @@ Vue.component('header-component', require('./components/Header.vue').default);
 // Vue.component('upload-component', require('./components/Uploadproduct.vue').default);
 // 購物車
 // Vue.component('shoplist-component', require('./components/Shoplist.vue').default);
-
-
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
