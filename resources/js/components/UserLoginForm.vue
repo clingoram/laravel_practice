@@ -24,6 +24,8 @@
       <b-button type="submit" variant="outline-primary">送出</b-button>
       <b-button type="reset" variant="danger">重設</b-button>
       <b-button variant="dark">忘記密碼?</b-button>
+
+      <p>沒有帳號?到<router-link to="/register">註冊</router-link></p>
     </b-form>
   </div>
 </template>

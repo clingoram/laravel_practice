@@ -13,7 +13,7 @@ import router from './router.js';
 window.Vue = require('vue').default;
 
 // bootstrap vue
-import { NavbarPlugin, FormPlugin, FormInputPlugin, ButtonPlugin, FormGroupPlugin } from 'bootstrap-vue';
+import { NavbarPlugin, FormPlugin, FormInputPlugin, ButtonPlugin, FormGroupPlugin, CarouselPlugin } from 'bootstrap-vue';
 // fontawesome
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
@@ -26,6 +26,7 @@ Vue.use(FormPlugin);
 Vue.use(FormInputPlugin);
 Vue.use(FormGroupPlugin);
 Vue.use(ButtonPlugin);
+Vue.use(CarouselPlugin);
 
 library.add(faShoppingCart, faSearch);
 Vue.component('font-awesome-icon', FontAwesomeIcon);
