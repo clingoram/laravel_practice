@@ -12589,23 +12589,58 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {
     console.log("register");
   },
   data: function data() {
     return {
+      max: 15,
+      min: 7,
       form: {
+        account: "",
         email: "",
-        account: ""
+        password: ""
       },
       show: true
     };
   },
   methods: {
+    /**
+     * 檢查inputs值。
+     * 若檢查通過，則把值傳給register function
+     * */
+    checkInputsValue: function checkInputsValue() {
+      var account = document.getElementById("register_account").value;
+      var email = document.getElementById("register_email").value;
+      var pwd = document.getElementById("register_password").value;
+      var accountPattern = /[0-9A-Za-z]i/;
+      var passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
+
+      if (email.search("@") === -1) {
+        alert("email錯誤");
+      }
+
+      if (accountPattern.test(account) === false || account.length < 5 || account.length > 15) {
+        alert("請重設帳號");
+      }
+
+      if (pwd.match(passwordPattern) === null) {
+        alert("請重設密碼");
+      }
+
+      console.log(account);
+      console.log(email);
+      console.log(pwd);
+    },
     onSubmit: function onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
+      event.preventDefault(); // alert(JSON.stringify(this.form));
     },
     onReset: function onReset(event) {
       var _this = this;
@@ -12613,11 +12648,28 @@ __webpack_require__.r(__webpack_exports__);
       event.preventDefault(); // Reset our form values
 
       this.form.email = "";
-      this.form.account = ""; // Trick to reset/clear native browser form validation state
+      this.form.account = "";
+      this.form.password = ""; // Trick to reset/clear native browser form validation state
 
       this.show = false;
       this.$nextTick(function () {
         _this.show = true;
+      });
+    },
+
+    /**
+     * 註冊。
+     * 把接收到的值傳到後端處理
+     * */
+    register: function register() {
+      axios.post("/api/shop/register", {
+        account: "Fred",
+        email: "Flintstone",
+        pwd: pwd
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
       });
     }
   }
@@ -12679,7 +12731,6 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('font-awesome-icon', _fort
  */
 // const files = require.context('./', true, /\.vue$/i)
 // files.keys().map(key => Vue.component(key.split('/').pop().split('.')[0], files(key).default))
-// Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 // 首頁
 
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('index-component', (__webpack_require__(/*! ./components/Index.vue */ "./resources/js/components/Index.vue")["default"])); // Header
@@ -59940,13 +59991,17 @@ var render = function () {
                       id: "register_account",
                       placeholder: "帳號",
                       required: "",
-                      max: 15,
-                      min: 5,
+                      max: _vm.max,
+                      min: _vm.min,
                     },
                     model: {
                       value: _vm.form.account,
                       callback: function ($$v) {
-                        _vm.$set(_vm.form, "account", $$v)
+                        _vm.$set(
+                          _vm.form,
+                          "account",
+                          typeof $$v === "string" ? $$v.trim() : $$v
+                        )
                       },
                       expression: "form.account",
                     },
@@ -60001,9 +60056,10 @@ var render = function () {
                     attrs: {
                       id: "register_password",
                       placeholder: "密碼",
+                      type: "password",
                       required: "",
-                      max: 15,
-                      min: 5,
+                      max: _vm.max,
+                      min: _vm.min,
                     },
                     model: {
                       value: _vm.form.password,
@@ -60019,7 +60075,10 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "b-button",
-                { attrs: { type: "submit", variant: "outline-primary" } },
+                {
+                  attrs: { type: "submit", variant: "outline-primary" },
+                  on: { click: _vm.checkInputsValue },
+                },
                 [_vm._v("送出")]
               ),
               _vm._v(" "),
