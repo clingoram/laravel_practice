@@ -1,11 +1,12 @@
 <?php
 
+use App\Http\Controllers\Auth\RegisterController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\ShopcartController;
 use App\Http\Controllers\PageController;
-use App\Http\Controllers\Products\ProductsController;
+use App\Http\Controllers\ProductsController;
 // use Illuminate\Support\Facades\Auth;
 
 /*
@@ -49,4 +50,5 @@ use App\Http\Controllers\Products\ProductsController;
 
 Route::prefix('/shop')->group(function () {
     Route::get('', [ProductsController::class, 'index']);
+    Route::post('/register', [RegisterController::class, 'create']);
 });

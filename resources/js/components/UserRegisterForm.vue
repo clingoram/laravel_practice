@@ -48,6 +48,7 @@
           required
           v-bind:max="max"
           v-bind:min="min"
+          autocomplete="on"
         ></b-form-input>
       </b-form-group>
 
@@ -70,7 +71,7 @@ export default {
   data() {
     return {
       max: 15,
-      min: 7,
+      min: 8,
       form: {
         account: "",
         email: "",
@@ -89,28 +90,33 @@ export default {
       const email = document.getElementById("register_email").value;
       const pwd = document.getElementById("register_password").value;
 
-      let accountPattern = /[0-9A-Za-z]i/;
-      let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
-      if (email.search("@") === -1) {
-        alert("email錯誤");
-      }
-      if (
-        accountPattern.test(account) === false ||
-        account.length < 5 ||
-        account.length > 15
-      ) {
-        alert("請重設帳號");
-      }
-      if (pwd.match(passwordPattern) === null) {
-        alert("請重設密碼");
-      }
-      console.log(account);
-      console.log(email);
-      console.log(pwd);
+      // let accountPattern = /[0-9A-Za-z]i/;
+      // let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
+      // if (email.search("@") === -1) {
+      //   alert("email錯誤");
+      // }
+      // if (
+      //   accountPattern.test(account) === false ||
+      //   account.length < 5 ||
+      //   account.length > 15
+      // ) {
+      //   alert("請重設帳號");
+      // }
+      // if (pwd.match(passwordPattern) === null) {
+      //   alert("請重設密碼");
+      // }
+      // console.log(account);
+      // console.log(email);
+      // console.log(pwd);
+
+      // let data = { account: account, email: email, pwd: pwd };
+      // return data;
     },
     onSubmit(event) {
       event.preventDefault();
       // alert(JSON.stringify(this.form));
+
+      // return this.register(this.form);
     },
     onReset(event) {
       event.preventDefault();
@@ -128,12 +134,12 @@ export default {
      * 註冊。
      * 把接收到的值傳到後端處理
      * */
-    register() {
+    register(data) {
       axios
         .post("/api/shop/register", {
-          account: "Fred",
-          email: "Flintstone",
-          pwd,
+          account: data.account,
+          email: data.email,
+          pwd: data.pwd,
         })
         .then(function (response) {
           console.log(response);
