@@ -7,7 +7,7 @@
         id="registerAccount"
         label="帳號名稱"
         label-for="registerAccount"
-        description="請輸入數字0-9及大小寫字母。"
+        description="請輸入數字0-9及大小寫字母，長度在5 - 20之間。"
       >
         <b-form-input
           id="register_account"
@@ -52,12 +52,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <b-button
+      <!-- <b-button
         type="submit"
         variant="outline-primary"
         v-on:click="checkInputsValue"
         >送出</b-button
-      >
+      > -->
+
+      <b-button type="submit" variant="outline-primary">送出</b-button>
       <b-button type="reset" variant="danger">重設</b-button>
       <p>已有帳號?到<router-link to="/login">登入</router-link></p>
     </b-form>
@@ -66,12 +68,12 @@
 <script>
 export default {
   mounted() {
-    console.log("register");
+    // console.log("register");
   },
   data() {
     return {
-      max: 15,
-      min: 8,
+      max: 20,
+      min: 5,
       form: {
         account: "",
         email: "",
@@ -87,36 +89,30 @@ export default {
      * */
     checkInputsValue() {
       const account = document.getElementById("register_account").value;
-      const email = document.getElementById("register_email").value;
+      // const email = document.getElementById("register_email").value;
       const pwd = document.getElementById("register_password").value;
 
-      // let accountPattern = /[0-9A-Za-z]i/;
-      // let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
-      // if (email.search("@") === -1) {
-      //   alert("email錯誤");
-      // }
-      // if (
-      //   accountPattern.test(account) === false ||
-      //   account.length < 5 ||
-      //   account.length > 15
-      // ) {
-      //   alert("請重設帳號");
-      // }
-      // if (pwd.match(passwordPattern) === null) {
-      //   alert("請重設密碼");
-      // }
-      // console.log(account);
-      // console.log(email);
-      // console.log(pwd);
+      let accountPattern = /^[0-9A-Za-z]+$/;
+      let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
 
-      // let data = { account: account, email: email, pwd: pwd };
-      // return data;
+      if (accountPattern.test(account) === false) {
+        alert(`帳號長度請重設。`);
+        return false;
+      }
+      if (pwd.match(passwordPattern) === null) {
+        alert("請重設密碼");
+        return false;
+      }
+      return true;
     },
     onSubmit(event) {
       event.preventDefault();
       // alert(JSON.stringify(this.form));
 
-      // return this.register(this.form);
+      if (this.checkInputsValue() === true) {
+        return this.register(this.form);
+      }
+      return;
     },
     onReset(event) {
       event.preventDefault();
@@ -135,11 +131,13 @@ export default {
      * 把接收到的值傳到後端處理
      * */
     register(data) {
+      console.log(data);
       axios
-        .post("/api/shop/register", {
-          account: data.account,
+        .post("api/shop/register", {
+          name: data.account,
           email: data.email,
-          pwd: data.pwd,
+          password: data.pwd,
+          role: "A",
         })
         .then(function (response) {
           console.log(response);

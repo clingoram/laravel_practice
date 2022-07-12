@@ -32,7 +32,7 @@
 <script>
 export default {
   mounted() {
-    console.log("login");
+    // console.log("login");
   },
   data() {
     return {
@@ -58,6 +58,19 @@ export default {
       this.$nextTick(() => {
         this.show = true;
       });
+    },
+    login() {
+      axios
+        .get("/api/shop/login", {
+          account,
+          pwd,
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };

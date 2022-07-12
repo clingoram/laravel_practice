@@ -33,7 +33,7 @@ export default {
   },
   // menu
   mounted() {
-    console.log("Menu");
+    // console.log("Menu");
   },
   // data: function () {
   //   return {

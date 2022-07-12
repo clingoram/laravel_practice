@@ -12297,8 +12297,7 @@ __webpack_require__.r(__webpack_exports__);
     usermenu: _UserMenu_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
   // menu
-  mounted: function mounted() {
-    console.log("Menu");
+  mounted: function mounted() {// console.log("Menu");
   } // data: function () {
   //   return {
   //     item: {
@@ -12483,6 +12482,16 @@ __webpack_require__.r(__webpack_exports__);
       this.$nextTick(function () {
         _this.show = true;
       });
+    },
+    login: function login() {
+      axios.get("/api/shop/login", {
+        account: account,
+        pwd: pwd
+      }).then(function (response) {
+        console.log(response);
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   }
 });
@@ -12596,14 +12605,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log("register");
+  mounted: function mounted() {// console.log("register");
   },
   data: function data() {
     return {
-      max: 15,
-      min: 8,
+      max: 20,
+      min: 5,
       form: {
         account: "",
         email: "",
@@ -12618,32 +12628,32 @@ __webpack_require__.r(__webpack_exports__);
      * 若檢查通過，則把值傳給register function
      * */
     checkInputsValue: function checkInputsValue() {
-      var account = document.getElementById("register_account").value;
-      var email = document.getElementById("register_email").value;
-      var pwd = document.getElementById("register_password").value; // let accountPattern = /[0-9A-Za-z]i/;
-      // let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
-      // if (email.search("@") === -1) {
-      //   alert("email錯誤");
-      // }
-      // if (
-      //   accountPattern.test(account) === false ||
-      //   account.length < 5 ||
-      //   account.length > 15
-      // ) {
-      //   alert("請重設帳號");
-      // }
-      // if (pwd.match(passwordPattern) === null) {
-      //   alert("請重設密碼");
-      // }
-      // console.log(account);
-      // console.log(email);
-      // console.log(pwd);
-      // let data = { account: account, email: email, pwd: pwd };
-      // return data;
+      var account = document.getElementById("register_account").value; // const email = document.getElementById("register_email").value;
+
+      var pwd = document.getElementById("register_password").value;
+      var accountPattern = /^[0-9A-Za-z]+$/;
+      var passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
+
+      if (accountPattern.test(account) === false) {
+        alert("\u5E33\u865F\u9577\u5EA6\u8ACB\u91CD\u8A2D\u3002");
+        return false;
+      }
+
+      if (pwd.match(passwordPattern) === null) {
+        alert("請重設密碼");
+        return false;
+      }
+
+      return true;
     },
     onSubmit: function onSubmit(event) {
       event.preventDefault(); // alert(JSON.stringify(this.form));
-      // return this.register(this.form);
+
+      if (this.checkInputsValue() === true) {
+        return this.register(this.form);
+      }
+
+      return;
     },
     onReset: function onReset(event) {
       var _this = this;
@@ -12665,10 +12675,12 @@ __webpack_require__.r(__webpack_exports__);
      * 把接收到的值傳到後端處理
      * */
     register: function register(data) {
-      axios.post("/api/shop/register", {
+      console.log(data);
+      axios.post("api/shop/register/", {
         account: data.account,
         email: data.email,
-        pwd: data.pwd
+        password: data.pwd,
+        role: "A"
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -59985,7 +59997,8 @@ var render = function () {
                     id: "registerAccount",
                     label: "帳號名稱",
                     "label-for": "registerAccount",
-                    description: "請輸入數字0-9及大小寫字母。",
+                    description:
+                      "請輸入數字0-9及大小寫字母，長度在5 - 20之間。",
                   },
                 },
                 [
@@ -60079,10 +60092,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "b-button",
-                {
-                  attrs: { type: "submit", variant: "outline-primary" },
-                  on: { click: _vm.checkInputsValue },
-                },
+                { attrs: { type: "submit", variant: "outline-primary" } },
                 [_vm._v("送出")]
               ),
               _vm._v(" "),
