@@ -88,14 +88,14 @@ export default {
      * 若檢查通過，則把值傳給register function
      * */
     checkInputsValue() {
-      const account = document.getElementById("register_account").value;
+      const name = document.getElementById("register_account").value;
       // const email = document.getElementById("register_email").value;
       const pwd = document.getElementById("register_password").value;
 
       let accountPattern = /^[0-9A-Za-z]+$/;
       let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
 
-      if (accountPattern.test(account) === false) {
+      if (accountPattern.test(name) === false) {
         alert(`帳號長度請重設。`);
         return false;
       }
@@ -139,10 +139,10 @@ export default {
           password: data.pwd,
           role: "A",
         })
-        .then(function (response) {
+        .then((response) => {
           console.log(response);
         })
-        .catch(function (error) {
+        .catch((error) => {
           console.log(error);
         });
     },

@@ -12453,8 +12453,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  mounted: function mounted() {
-    console.log("login");
+  mounted: function mounted() {// console.log("login");
   },
   data: function data() {
     return {
@@ -12628,13 +12627,13 @@ __webpack_require__.r(__webpack_exports__);
      * 若檢查通過，則把值傳給register function
      * */
     checkInputsValue: function checkInputsValue() {
-      var account = document.getElementById("register_account").value; // const email = document.getElementById("register_email").value;
+      var name = document.getElementById("register_account").value; // const email = document.getElementById("register_email").value;
 
       var pwd = document.getElementById("register_password").value;
       var accountPattern = /^[0-9A-Za-z]+$/;
       var passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
 
-      if (accountPattern.test(account) === false) {
+      if (accountPattern.test(name) === false) {
         alert("\u5E33\u865F\u9577\u5EA6\u8ACB\u91CD\u8A2D\u3002");
         return false;
       }
@@ -12676,8 +12675,8 @@ __webpack_require__.r(__webpack_exports__);
      * */
     register: function register(data) {
       console.log(data);
-      axios.post("api/shop/register/", {
-        account: data.account,
+      axios.post("api/shop/register", {
+        name: data.account,
         email: data.email,
         password: data.pwd,
         role: "A"

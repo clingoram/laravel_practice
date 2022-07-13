@@ -1,18 +1,17 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Products;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-
-// 對應model
-use App\Products;
-// use App\Auth;
-use DateTime;
-
 // DB
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+
+// 對應model
+use App\Models\Products;
+// use App\Auth;
+use DateTime;
 
 class ProductsController extends Controller
 {
@@ -31,15 +30,18 @@ class ProductsController extends Controller
     public function index()
     {
         // to show all rows of datas from table merchandises in index.blade.php
-        $user = Auth::user();
+        // $user = Auth::user();
 
-        if (isset(Auth::user()->id) and $user->role == 'A') {
-            // 登入，導到上傳商品頁面
-            return view('product.product_management');
-        } else {
-            // to login page
-            return redirect('/')->with('error', 'Please login.');
-        }
+        // if (isset(Auth::user()->id) and $user->role == 'A') {
+        //     // 登入，導到上傳商品頁面
+        //     return view('product.product_management');
+        // } else {
+        //     // to login page
+        //     return redirect('/')->with('error', 'Please login.');
+        // }
+
+        $products = Products::all();
+        return $products;
     }
 
     /**

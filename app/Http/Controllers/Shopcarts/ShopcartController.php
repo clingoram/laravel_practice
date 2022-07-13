@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 
 // 對應model
-use App\Products;
-use App\Shopcart;
+use App\Models\Products;
+use App\Models\Shopcart;
 use DateTime;
 
 // DB
