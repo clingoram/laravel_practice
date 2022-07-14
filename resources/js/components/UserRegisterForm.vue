@@ -11,7 +11,7 @@
       >
         <b-form-input
           id="register_account"
-          v-model.trim="form.account"
+          v-model.trim="form.name"
           placeholder="帳號"
           required
           v-bind:max="max"
@@ -52,14 +52,14 @@
         ></b-form-input>
       </b-form-group>
 
-      <!-- <b-button
+      <b-button
         type="submit"
         variant="outline-primary"
         v-on:click="checkInputsValue"
         >送出</b-button
-      > -->
+      >
 
-      <b-button type="submit" variant="outline-primary">送出</b-button>
+      <!-- <b-button type="submit" variant="outline-primary">送出</b-button> -->
       <b-button type="reset" variant="danger">重設</b-button>
       <p>已有帳號?到<router-link to="/login">登入</router-link></p>
     </b-form>
@@ -75,7 +75,7 @@ export default {
       max: 20,
       min: 5,
       form: {
-        account: "",
+        name: "",
         email: "",
         password: "",
       },
@@ -89,7 +89,7 @@ export default {
      * */
     checkInputsValue() {
       const name = document.getElementById("register_account").value;
-      // const email = document.getElementById("register_email").value;
+      const email = document.getElementById("register_email").value;
       const pwd = document.getElementById("register_password").value;
 
       let accountPattern = /^[0-9A-Za-z]+$/;
@@ -97,28 +97,38 @@ export default {
 
       if (accountPattern.test(name) === false) {
         alert(`帳號長度請重設。`);
-        return false;
+        return;
       }
       if (pwd.match(passwordPattern) === null) {
         alert("請重設密碼");
-        return false;
+        return;
       }
-      return true;
+      let data = {
+        name: name,
+        email: email,
+        pwd: pwd,
+      };
+      return data;
+      // console.log(data);
+      // return data;
+      // return true;
     },
     onSubmit(event) {
       event.preventDefault();
+      return this.register();
       // alert(JSON.stringify(this.form));
-
-      if (this.checkInputsValue() === true) {
-        return this.register(this.form);
-      }
-      return;
+      // let check = this.checkInputsValue();
+      // return this.register(check);
+      // if (this.checkInputsValue() === true) {
+      //   return this.register(this.form);
+      // }
+      // return;
     },
     onReset(event) {
       event.preventDefault();
       // Reset our form values
+      this.form.name = "";
       this.form.email = "";
-      this.form.account = "";
       this.form.password = "";
       // Trick to reset/clear native browser form validation state
       this.show = false;
@@ -130,21 +140,22 @@ export default {
      * 註冊。
      * 把接收到的值傳到後端處理
      * */
-    register(data) {
-      console.log(data);
-      axios
-        .post("api/shop/register", {
-          name: data.account,
-          email: data.email,
-          password: data.pwd,
-          role: "A",
-        })
-        .then((response) => {
-          console.log(response);
-        })
-        .catch((error) => {
-          console.log(error);
-        });
+    register() {
+      let getValue = this.checkInputsValue();
+      console.log(getValue.name);
+      // axios
+      //   .post("api/shop/register", {
+      //     name: data.name,
+      //     email: data.email,
+      //     password: data.pwd,
+      //     role: "A",
+      //   })
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     },
   },
 };

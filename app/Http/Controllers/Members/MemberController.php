@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Auth;
 use DateTime;
-
 // model user
 use App\Models\Members;
 
@@ -18,12 +17,12 @@ class MemberController extends Controller
     private $email;
     private $password;
 
-    // public function __construct(string $user, string $email, string $pwd)
-    // {
-    //     $this->user = $user;
-    //     $this->email = $email;
-    //     $this->password = $pwd;
-    // }
+    public function __construct(string $user, string $email, string $pwd)
+    {
+        $this->user = $user;
+        $this->email = $email;
+        $this->password = $pwd;
+    }
 
     public function checkExist($data)
     {
@@ -49,7 +48,7 @@ class MemberController extends Controller
     //     ]);
     // }
 
-    public function register(Request $request)
+    public function register()
     {
         // $data = $request->all();
         // $this->validator($request->all());
@@ -68,15 +67,17 @@ class MemberController extends Controller
         // ]);
         // }
 
-        $data = new Members();
-        $data->name = $request->name;
-        $data->email = $request->email;
-        $data->password = Hash::make($request->password);
-        $data->role = $request->role;
-        $data->updated_at = $now;
-        $data->created_at = $now;
+        var_dump($this->user);
 
-        $data->save();
+        // $data = new Members();
+        // $data->name = $request->name;
+        // $data->email = $request->email;
+        // $data->password = Hash::make($request->password);
+        // $data->role = $request->role;
+        // $data->updated_at = $now;
+        // $data->created_at = $now;
+
+        // $data->save();
     }
 
     public function login(Request $request)

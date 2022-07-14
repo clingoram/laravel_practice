@@ -12614,7 +12614,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 20,
       min: 5,
       form: {
-        account: "",
+        name: "",
         email: "",
         password: ""
       },
@@ -12627,40 +12627,48 @@ __webpack_require__.r(__webpack_exports__);
      * 若檢查通過，則把值傳給register function
      * */
     checkInputsValue: function checkInputsValue() {
-      var name = document.getElementById("register_account").value; // const email = document.getElementById("register_email").value;
-
+      var name = document.getElementById("register_account").value;
+      var email = document.getElementById("register_email").value;
       var pwd = document.getElementById("register_password").value;
       var accountPattern = /^[0-9A-Za-z]+$/;
       var passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
 
       if (accountPattern.test(name) === false) {
         alert("\u5E33\u865F\u9577\u5EA6\u8ACB\u91CD\u8A2D\u3002");
-        return false;
+        return;
       }
 
       if (pwd.match(passwordPattern) === null) {
         alert("請重設密碼");
-        return false;
+        return;
       }
 
-      return true;
+      var data = {
+        name: name,
+        email: email,
+        pwd: pwd
+      };
+      return data; // console.log(data);
+      // return data;
+      // return true;
     },
     onSubmit: function onSubmit(event) {
-      event.preventDefault(); // alert(JSON.stringify(this.form));
-
-      if (this.checkInputsValue() === true) {
-        return this.register(this.form);
-      }
-
-      return;
+      event.preventDefault();
+      return this.register(); // alert(JSON.stringify(this.form));
+      // let check = this.checkInputsValue();
+      // return this.register(check);
+      // if (this.checkInputsValue() === true) {
+      //   return this.register(this.form);
+      // }
+      // return;
     },
     onReset: function onReset(event) {
       var _this = this;
 
       event.preventDefault(); // Reset our form values
 
+      this.form.name = "";
       this.form.email = "";
-      this.form.account = "";
       this.form.password = ""; // Trick to reset/clear native browser form validation state
 
       this.show = false;
@@ -12673,18 +12681,21 @@ __webpack_require__.r(__webpack_exports__);
      * 註冊。
      * 把接收到的值傳到後端處理
      * */
-    register: function register(data) {
-      console.log(data);
-      axios.post("api/shop/register", {
-        name: data.account,
-        email: data.email,
-        password: data.pwd,
-        role: "A"
-      }).then(function (response) {
-        console.log(response);
-      })["catch"](function (error) {
-        console.log(error);
-      });
+    register: function register() {
+      var getValue = this.checkInputsValue();
+      console.log(getValue.name); // axios
+      //   .post("api/shop/register", {
+      //     name: data.name,
+      //     email: data.email,
+      //     password: data.pwd,
+      //     role: "A",
+      //   })
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((error) => {
+      //     console.log(error);
+      //   });
     }
   }
 });
@@ -60010,15 +60021,15 @@ var render = function () {
                       min: _vm.min,
                     },
                     model: {
-                      value: _vm.form.account,
+                      value: _vm.form.name,
                       callback: function ($$v) {
                         _vm.$set(
                           _vm.form,
-                          "account",
+                          "name",
                           typeof $$v === "string" ? $$v.trim() : $$v
                         )
                       },
-                      expression: "form.account",
+                      expression: "form.name",
                     },
                   }),
                 ],
@@ -60091,7 +60102,10 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "b-button",
-                { attrs: { type: "submit", variant: "outline-primary" } },
+                {
+                  attrs: { type: "submit", variant: "outline-primary" },
+                  on: { click: _vm.checkInputsValue },
+                },
                 [_vm._v("送出")]
               ),
               _vm._v(" "),
