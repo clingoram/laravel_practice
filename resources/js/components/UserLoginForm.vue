@@ -20,6 +20,7 @@
           required
         ></b-form-input>
       </b-form-group>
+      <!-- <b-form-checkbox size="sm" id="remember">Remember Me</b-form-checkbox> -->
 
       <b-button type="submit" variant="outline-primary">送出</b-button>
       <b-button type="reset" variant="danger">重設</b-button>
@@ -39,6 +40,7 @@ export default {
       form: {
         email: "",
         name: "",
+        // status: "Remember_Me",
       },
       show: true,
     };

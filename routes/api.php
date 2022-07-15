@@ -9,10 +9,9 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Shopcarts\ShopcartController;
 use App\Http\Controllers\Pages\PageController;
 use App\Http\Controllers\Products\ProductsController;
-use App\Http\Controllers\Members\MemberController;
-// use App\Products;
-
-// use App\Http\Controllers\User\RegisterController;
+// use App\Http\Controllers\Members\MemberController;
+use App\Http\Controllers\Users\RegisterController;
+use App\Http\Controllers\Users\LoginController;
 
 // use Illuminate\Support\Facades\Auth;
 
@@ -27,18 +26,17 @@ use App\Http\Controllers\Members\MemberController;
 |
 */
 
-// Route::middleware('auth:api')->get('/user', function (Request $request) {
-//     return $request->user();
-// });
+Route::middleware('auth:api')->get('/user', function (Request $request) {
+    return $request->user();
+});
 
 Route::prefix('/shop')->group(function () {
     // index
     Route::get('/', [ProductsController::class, 'index']);
 
     // register
-    // Route::post('/register/{data}', [RegisterController::class, 'create']);
-    Route::post('/register', [MemberController::class, 'register']);
-
+    // Route::post('/register/', [RegisterController::class, 'create']);
+    Route::post('/register', [RegisterController::class, 'register']);
     // login
-    // Route::get('/login', [LoginController::class, '']);
+    Route::get('/login', [LoginController::class, '']);
 });

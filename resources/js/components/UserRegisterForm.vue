@@ -103,15 +103,13 @@ export default {
         alert("請重設密碼");
         return;
       }
-      let data = {
-        name: name,
-        email: email,
-        pwd: pwd,
-      };
-      return data;
-      // console.log(data);
-      // return data;
-      // return true;
+      // let data = {
+      //   name: name,
+      //   email: email,
+      //   pwd: pwd,
+      // };
+
+      return [name, email, pwd];
     },
     onSubmit(event) {
       event.preventDefault();
@@ -142,20 +140,20 @@ export default {
      * */
     register() {
       let getValue = this.checkInputsValue();
-      console.log(getValue.name);
-      // axios
-      //   .post("api/shop/register", {
-      //     name: data.name,
-      //     email: data.email,
-      //     password: data.pwd,
-      //     role: "A",
-      //   })
-      //   .then((response) => {
-      //     console.log(response);
-      //   })
-      //   .catch((error) => {
-      //     console.log(error);
-      //   });
+      // console.log(getValue);
+      axios
+        .post("api/shop/register", {
+          name: getValue.name,
+          email: getValue.email,
+          password: getValue.pwd,
+          role: "M",
+        })
+        .then((response) => {
+          console.log(response);
+        })
+        .catch((error) => {
+          console.log(error);
+        });
     },
   },
 };
