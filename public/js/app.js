@@ -12453,31 +12453,72 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {// console.log("login");
   },
   data: function data() {
     return {
+      min: 5,
+      max: 20,
       form: {
-        email: "",
-        name: "" // status: "Remember_Me",
+        // email: "",
+        name: "",
+        password: "" // status: "Remember_Me",
 
       },
       show: true
     };
   },
   methods: {
+    /**
+     * 檢查inputs值。
+     * 若檢查通過，則把值傳給function
+     * */
+    checkInputsValue: function checkInputsValue() {
+      var name = document.getElementById("login_key").value;
+      var pwd = document.getElementById("login_password").value;
+      var accountPattern = /^[0-9A-Za-z]+$/;
+      var passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
+
+      if (accountPattern.test(name) === false) {
+        alert("\u5E33\u865F\u9577\u5EA6\u8ACB\u91CD\u8A2D\u3002");
+        return;
+      }
+
+      if (pwd.match(passwordPattern) === null) {
+        alert("請重設密碼");
+        return;
+      } // let data = {
+      //   name: name,
+      //   email: email,
+      //   pwd: pwd,
+      // };
+
+
+      return [name, pwd];
+    },
     onSubmit: function onSubmit(event) {
-      event.preventDefault();
-      alert(JSON.stringify(this.form));
+      event.preventDefault(); // alert(JSON.stringify(this.form));
+
+      return this.login();
     },
     onReset: function onReset(event) {
       var _this = this;
 
       event.preventDefault(); // Reset our form values
+      // this.form.email = "";
 
-      this.form.email = "";
-      this.form.name = ""; // Trick to reset/clear native browser form validation state
+      this.form.name = "";
+      this.form.password = ""; // Trick to reset/clear native browser form validation state
 
       this.show = false;
       this.$nextTick(function () {
@@ -12485,9 +12526,15 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     login: function login() {
-      axios.get("/api/shop/login", {
-        account: account,
-        pwd: pwd
+      var loginData = this.checkInputsValue();
+      console.log(loginData);
+      axios.get("api/shop/login", {
+        // name: loginData.name,
+        // pwd: loginData.pwd,
+        params: {
+          name: loginData.name,
+          pwd: loginData.pwd
+        }
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -60670,13 +60717,15 @@ var render = function () {
                       id: "login_key",
                       placeholder: "使用者名稱",
                       required: "",
+                      max: _vm.max,
+                      min: _vm.min,
                     },
                     model: {
-                      value: _vm.form.account,
+                      value: _vm.form.name,
                       callback: function ($$v) {
-                        _vm.$set(_vm.form, "account", $$v)
+                        _vm.$set(_vm.form, "name", $$v)
                       },
-                      expression: "form.account",
+                      expression: "form.name",
                     },
                   }),
                 ],
@@ -60697,7 +60746,9 @@ var render = function () {
                     attrs: {
                       id: "login_password",
                       placeholder: "密碼",
+                      type: "password",
                       required: "",
+                      autocomplete: "on",
                     },
                     model: {
                       value: _vm.form.password,
@@ -60713,7 +60764,10 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "b-button",
-                { attrs: { type: "submit", variant: "outline-primary" } },
+                {
+                  attrs: { type: "submit", variant: "outline-primary" },
+                  on: { click: _vm.checkInputsValue },
+                },
                 [_vm._v("送出")]
               ),
               _vm._v(" "),

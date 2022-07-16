@@ -26,9 +26,9 @@ use App\Http\Controllers\Users\LoginController;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 Route::prefix('/shop')->group(function () {
     // index
@@ -38,5 +38,5 @@ Route::prefix('/shop')->group(function () {
     // Route::post('/register/', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'register']);
     // login
-    Route::get('/login', [LoginController::class, '']);
+    Route::get('/login/{data}', [LoginController::class, 'login']);
 });

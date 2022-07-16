@@ -42,15 +42,5 @@ class RegisterController extends UserController
       'updated_at' => $now,
       'created_at' => $now
     ]);
-
-    // $data = new Members();
-    // $data->name = $request->name;
-    // $data->email = $request->email;
-    // $data->password = Hash::make($request->password);
-    // $data->role = $request->role;
-    // $data->updated_at = $now;
-    // $data->created_at = $now;
-
-    // $data->save();
   }
 }

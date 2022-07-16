@@ -14,17 +14,22 @@ class LoginController extends UserController
 {
   public function login(Request $request)
   {
-    $credentials = $request->only('name', 'password');
+    // $credentials = $request->only('name', 'password');
 
-    parent::checkUserExist($request['name']);
+    // $check = parent::checkUserExist($request['name']);
     // $token = Auth::attempt($credentials);
+
+    DB::table('users')
+      ->where('name', '=', $request['name'])
+      ->dump();
+    // var_dump($check);
 
     // if (!$token) {
     //   return $this->response->error('登入失敗', 401);
     // }
-    if (Hash::check('secret', $request['passwrod'])) {
-      //密碼正確
-    }
+    // if (Hash::check('secret', $request['passwrod'])) {
+    //密碼正確
+    // }
 
     // if (Auth::check()) {
     //     $insert_data = Auth::user();

@@ -145,7 +145,7 @@ abstract class UserController extends Controller
                 409
             );
         }
-        return true;
+        return $find_user;
     }
     /**
      * Get a validator for an incoming registration request.
