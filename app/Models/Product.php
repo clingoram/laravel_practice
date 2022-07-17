@@ -11,7 +11,7 @@ class Products extends Model
     protected $table = 'products';
 
     protected $fillable = [
-        'name', 'price', 'image_path', 'amount'
+        'name', 'price', 'image_url_path', 'amounts', 'status'
     ];
 
     // public function shopcarts(){

@@ -115,26 +115,25 @@ abstract class UserController extends Controller
     private $email;
     private $password;
 
-    public function __construct(string $user, string $email, string $pwd)
-    {
-        $this->user = $user;
-        $this->email = $email;
-        $this->password = $pwd;
-    }
+    // public function __construct(string $user, string $email, string $pwd)
+    // {
+    //     $this->user = $user;
+    //     $this->email = $email;
+    //     $this->password = $pwd;
+    // }
 
-    public function checkUserExist()
+    public function checkUserExist($data)
     {
         // $find_user = Members::where('name', $this->user)->exists();
 
-        $find_user = DB::table('users')
-            ->where('name', '=', $this->user)
-            ->get();
-
-
         // $find_user = DB::table('users')
-        //     ->where('name', '=', $data)
+        //     ->where('name', '=', $this->user)
         //     ->get();
 
+
+        $find_user = DB::table('users')
+            ->where('name', '=', $data)
+            ->get();
 
         if ($find_user !== false) {
             return response()->json(

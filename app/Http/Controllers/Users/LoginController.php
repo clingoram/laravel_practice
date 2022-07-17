@@ -20,9 +20,8 @@ class LoginController extends UserController
     // $token = Auth::attempt($credentials);
 
     DB::table('users')
-      ->where('name', '=', $request['name'])
+      ->where('name', '=', $request->name)
       ->dump();
-    // var_dump($check);
 
     // if (!$token) {
     //   return $this->response->error('登入失敗', 401);

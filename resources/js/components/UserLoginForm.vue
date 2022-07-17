@@ -24,8 +24,6 @@
           autocomplete="on"
         ></b-form-input>
       </b-form-group>
-      <!-- <b-form-checkbox size="sm" id="remember">Remember Me</b-form-checkbox> -->
-
       <b-button
         type="submit"
         variant="outline-primary"
@@ -33,7 +31,6 @@
         >送出</b-button
       >
       <b-button type="reset" variant="danger">重設</b-button>
-      <b-button variant="dark">忘記密碼?</b-button>
 
       <p>沒有帳號?到<router-link to="/register">註冊</router-link></p>
     </b-form>
@@ -49,10 +46,8 @@ export default {
       min: 5,
       max: 20,
       form: {
-        // email: "",
         name: "",
         password: "",
-        // status: "Remember_Me",
       },
       show: true,
     };
@@ -77,9 +72,8 @@ export default {
         alert("請重設密碼");
         return;
       }
-      // let data = {
+      // return {
       //   name: name,
-      //   email: email,
       //   pwd: pwd,
       // };
 
@@ -104,14 +98,15 @@ export default {
     },
     login() {
       let loginData = this.checkInputsValue();
-      console.log(loginData);
+      console.log(loginData.name);
       axios
         .get("api/shop/login", {
           // name: loginData.name,
           // pwd: loginData.pwd,
           params: {
             name: loginData.name,
-            pwd: loginData.pwd,
+
+            // pwd: loginData.pwd,
           },
         })
         .then((response) => {

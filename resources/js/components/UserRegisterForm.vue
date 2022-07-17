@@ -51,15 +51,12 @@
           autocomplete="on"
         ></b-form-input>
       </b-form-group>
-
       <b-button
         type="submit"
         variant="outline-primary"
         v-on:click="checkInputsValue"
         >送出</b-button
       >
-
-      <!-- <b-button type="submit" variant="outline-primary">送出</b-button> -->
       <b-button type="reset" variant="danger">重設</b-button>
       <p>已有帳號?到<router-link to="/login">登入</router-link></p>
     </b-form>
