@@ -38,5 +38,5 @@ Route::prefix('/shop')->group(function () {
     // Route::post('/register/', [RegisterController::class, 'create']);
     Route::post('/register', [RegisterController::class, 'register']);
     // login
-    Route::get('/login/{data}', [LoginController::class, 'login']);
+    Route::post('/login', [LoginController::class, 'login']);
 });

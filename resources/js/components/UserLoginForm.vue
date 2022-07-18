@@ -6,7 +6,7 @@
       <b-form-group id="loginKey" label="帳號名稱" label-for="loginKey">
         <b-form-input
           id="login_key"
-          v-model="form.name"
+          v-model.trim="form.name"
           placeholder="使用者名稱"
           required
           v-bind:max="max"
@@ -24,12 +24,13 @@
           autocomplete="on"
         ></b-form-input>
       </b-form-group>
-      <b-button
+      <!-- <b-button
         type="submit"
         variant="outline-primary"
         v-on:click="checkInputsValue"
         >送出</b-button
-      >
+      > -->
+      <b-button type="submit" variant="outline-primary">送出</b-button>
       <b-button type="reset" variant="danger">重設</b-button>
 
       <p>沒有帳號?到<router-link to="/register">註冊</router-link></p>
@@ -46,7 +47,7 @@ export default {
       min: 5,
       max: 20,
       form: {
-        name: "",
+        name: this.name ? this.name : "",
         password: "",
       },
       show: true,
@@ -61,28 +62,27 @@ export default {
       const name = document.getElementById("login_key").value;
       const pwd = document.getElementById("login_password").value;
 
-      let accountPattern = /^[0-9A-Za-z]+$/;
-      let passwordPattern = /^[0-9A-Za-z]\w{7,14}$/;
-
-      if (accountPattern.test(name) === false) {
-        alert(`帳號長度請重設。`);
+      if (name === "") {
+        alert("帳號錯誤。");
         return;
       }
-      if (pwd.match(passwordPattern) === null) {
-        alert("請重設密碼");
+      if (pwd === "") {
+        alert("密碼錯誤");
         return;
       }
       // return {
       //   name: name,
       //   pwd: pwd,
       // };
-
-      return [name, pwd];
+      return true;
+      // return [name, pwd];
     },
     onSubmit(event) {
       event.preventDefault();
       // alert(JSON.stringify(this.form));
-      return this.login();
+      if (this.checkInputsValue() === true) {
+        return this.login();
+      }
     },
     onReset(event) {
       event.preventDefault();
@@ -97,17 +97,11 @@ export default {
       });
     },
     login() {
-      let loginData = this.checkInputsValue();
-      console.log(loginData.name);
+      console.log(typeof this.form);
       axios
-        .get("api/shop/login", {
-          // name: loginData.name,
-          // pwd: loginData.pwd,
-          params: {
-            name: loginData.name,
-
-            // pwd: loginData.pwd,
-          },
+        .post("api/shop/login", {
+          form: this.form,
+          // pwd: this.form.password,
         })
         .then((response) => {
           console.log(response);

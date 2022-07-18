@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 // model user
-use App\Models\Members;
+use App\Models\Member;
 
 // class UserController extends Controller
 // {
@@ -122,29 +122,21 @@ abstract class UserController extends Controller
     //     $this->password = $pwd;
     // }
 
+    // public function __construct(Request $request)
+    // {
+    //     $this->user = $request->form['name'];
+    //     $this->email = $request->form['email'] ? $request->form['email'] : null;
+    //     $this->password = $request->form['password'];
+    // }
+
     public function checkUserExist($data)
     {
-        // $find_user = Members::where('name', $this->user)->exists();
-
-        // $find_user = DB::table('users')
-        //     ->where('name', '=', $this->user)
-        //     ->get();
-
-
-        $find_user = DB::table('users')
-            ->where('name', '=', $data)
-            ->get();
-
-        if ($find_user !== false) {
-            return response()->json(
-                [
-                    'message' => '帳號錯誤',
-                    'status' => false
-                ],
-                409
-            );
-        }
-        return $find_user;
+        $sql = Member::where('name', $data)->get();
+        if ($sql) {
+            // found user
+            return false;
+        };
+        return true;
     }
     /**
      * Get a validator for an incoming registration request.

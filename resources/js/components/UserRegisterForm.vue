@@ -72,9 +72,10 @@ export default {
       max: 20,
       min: 5,
       form: {
-        name: "",
-        email: "",
-        password: "",
+        name: this.name ? this.name : "",
+        email: this.email ? this.email : "",
+        password: this.password ? this.password : "",
+        role: "A" ? "A" : "M",
       },
       show: true,
     };
@@ -106,17 +107,17 @@ export default {
       //   pwd: pwd,
       // };
 
-      return [name, email, pwd];
+      // return [name, email, pwd];
+      return true;
     },
     onSubmit(event) {
       event.preventDefault();
-      return this.register();
+
       // alert(JSON.stringify(this.form));
-      // let check = this.checkInputsValue();
-      // return this.register(check);
-      // if (this.checkInputsValue() === true) {
-      //   return this.register(this.form);
-      // }
+
+      if (this.checkInputsValue() === true) {
+        return this.register();
+      }
       // return;
     },
     onReset(event) {
@@ -136,14 +137,16 @@ export default {
      * 把接收到的值傳到後端處理
      * */
     register() {
-      let getValue = this.checkInputsValue();
+      // let getValue = this.checkInputsValue();
       // console.log(getValue);
       axios
         .post("api/shop/register", {
-          name: getValue.name,
-          email: getValue.email,
-          password: getValue.pwd,
-          role: "M",
+          form: this.form,
+
+          //  name: this.form.name,
+          // email: getValue.email,
+          // password: getValue.pwd,
+          // role: "M",
         })
         .then((response) => {
           console.log(response);

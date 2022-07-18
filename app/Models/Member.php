@@ -6,12 +6,15 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Members extends Model
+class Member extends Model
 {
     use SoftDeletes;
     use HasFactory;
 
     protected $table = "users";
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $guarded = ['id'];
 
     protected $fillable = [
         'name', 'email', 'password', 'role'
@@ -33,4 +36,11 @@ class Members extends Model
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    /**
+     * The attributes that should be mutated to dates.
+     *
+     * @var array
+     */
+    protected $dates = ['deleted_at'];
 }

@@ -10,37 +10,38 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use DateTime;
 // model user
-use App\Models\Members;
+use App\Models\Member;
 
 class RegisterController extends UserController
 {
 
   public function register(Request $request)
   {
-    $data = $request->all();
+    // $data = $request->all();
     parent::validator($request->all());
-    parent::checkUserExist($data['name']);
+    // parent::checkUserExist($request->form['name']);
+    // parent::checkUserExist();
 
     $now = new DateTime();
 
-    // if ($this->checkUserExist($data['name']) === true) {
-    // return Members::create([
-    //     'name' => $data['name'],
-    //     'email' => $data['email'],
-    //     'password' => Hash::make($data['password']),
-    //     'role' => $data['role'],
-    //     'updated_at' => $now,
-    //     'created_at' => $now
-    // ]);
-    // }
+    if (parent::checkUserExist($request->form['name']) === true) {
+      return Member::create([
+        'name' => $request->form['name'],
+        'email' => $request->form['email'],
+        'password' => Hash::make($request->form['password']),
+        'role' => $request->form['role'],
+        'updated_at' => $now,
+        'created_at' => $now
+      ]);
+    }
 
-    DB::table('users')->insert([
-      'name' => $request->name,
-      'email' => $request->email,
-      'password' => Hash::make($request->password),
-      'role' => $request->role,
-      'updated_at' => $now,
-      'created_at' => $now
-    ]);
+    // DB::table('users')->insert([
+    //   'name' => $request->form['name'],
+    //   'email' => $request->form['email'],
+    //   'password' => Hash::make($request->form['password']),
+    //   'role' => $request->form['role'],
+    //   'updated_at' => $now,
+    //   'created_at' => $now
+    // ]);
   }
 }

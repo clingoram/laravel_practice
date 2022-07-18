@@ -12361,6 +12361,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   mounted: function mounted() {// console.log("login");
   },
@@ -12369,7 +12370,7 @@ __webpack_require__.r(__webpack_exports__);
       min: 5,
       max: 20,
       form: {
-        name: "",
+        name: this.name ? this.name : "",
         password: ""
       },
       show: true
@@ -12394,17 +12395,20 @@ __webpack_require__.r(__webpack_exports__);
       if (pwd.match(passwordPattern) === null) {
         alert("請重設密碼");
         return;
-      }
+      } // return {
+      //   name: name,
+      //   pwd: pwd,
+      // };
 
-      return {
-        name: name,
-        pwd: pwd
-      }; // return [name, pwd];
+
+      return true; // return [name, pwd];
     },
     onSubmit: function onSubmit(event) {
       event.preventDefault(); // alert(JSON.stringify(this.form));
 
-      return this.login();
+      if (this.checkInputsValue() === true) {
+        return this.login();
+      }
     },
     onReset: function onReset(event) {
       var _this = this;
@@ -12421,15 +12425,11 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     login: function login() {
-      var loginData = this.checkInputsValue();
-      console.log(loginData);
-      axios.get("api/shop/login", {
-        // name: loginData.name,
-        // pwd: loginData.pwd,
-        params: {
-          name: loginData.name,
-          pwd: loginData.pwd
-        }
+      // const loginData = this.checkInputsValue();
+      console.log(this.form);
+      axios.post("api/shop/login", {
+        form: this.form // pwd: this.form.password,
+
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -12555,9 +12555,10 @@ __webpack_require__.r(__webpack_exports__);
       max: 20,
       min: 5,
       form: {
-        name: "",
-        email: "",
-        password: ""
+        name: this.name ? this.name : "",
+        email: this.email ? this.email : "",
+        password: this.password ? this.password : "",
+        role:  true ? "A" : 0
       },
       show: true
     };
@@ -12587,19 +12588,21 @@ __webpack_require__.r(__webpack_exports__);
       //   email: email,
       //   pwd: pwd,
       // };
+      // return [name, email, pwd];
 
 
-      return [name, email, pwd];
+      return true;
     },
     onSubmit: function onSubmit(event) {
-      event.preventDefault();
-      return this.register(); // alert(JSON.stringify(this.form));
+      event.preventDefault(); // return this.register();
+      // alert(JSON.stringify(this.form));
       // let check = this.checkInputsValue();
       // return this.register(check);
-      // if (this.checkInputsValue() === true) {
-      //   return this.register(this.form);
-      // }
-      // return;
+
+      if (this.checkInputsValue() === true) {
+        return this.register();
+      } // return;
+
     },
     onReset: function onReset(event) {
       var _this = this;
@@ -12621,13 +12624,14 @@ __webpack_require__.r(__webpack_exports__);
      * 把接收到的值傳到後端處理
      * */
     register: function register() {
-      var getValue = this.checkInputsValue(); // console.log(getValue);
-
+      // let getValue = this.checkInputsValue();
+      // console.log(getValue);
       axios.post("api/shop/register", {
-        name: getValue.name,
-        email: getValue.email,
-        password: getValue.pwd,
-        role: "M"
+        form: this.form //  name: this.form.name,
+        // email: getValue.email,
+        // password: getValue.pwd,
+        // role: "M",
+
       }).then(function (response) {
         console.log(response);
       })["catch"](function (error) {
@@ -60354,7 +60358,11 @@ var render = function () {
                     model: {
                       value: _vm.form.name,
                       callback: function ($$v) {
-                        _vm.$set(_vm.form, "name", $$v)
+                        _vm.$set(
+                          _vm.form,
+                          "name",
+                          typeof $$v === "string" ? $$v.trim() : $$v
+                        )
                       },
                       expression: "form.name",
                     },
@@ -60395,10 +60403,7 @@ var render = function () {
               _vm._v(" "),
               _c(
                 "b-button",
-                {
-                  attrs: { type: "submit", variant: "outline-primary" },
-                  on: { click: _vm.checkInputsValue },
-                },
+                { attrs: { type: "submit", variant: "outline-primary" } },
                 [_vm._v("送出")]
               ),
               _vm._v(" "),

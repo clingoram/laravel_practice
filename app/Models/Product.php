@@ -9,6 +9,9 @@ class Products extends Model
 {
     //
     protected $table = 'products';
+    protected $primaryKey = 'id';
+    public $incrementing = true;
+    protected $guarded = ['id'];
 
     protected $fillable = [
         'name', 'price', 'image_url_path', 'amounts', 'status'

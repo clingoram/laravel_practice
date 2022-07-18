@@ -3,33 +3,53 @@
 namespace App\Http\Controllers\Users;
 
 use Illuminate\Http\Request;
+
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use DateTime;
 // model user
-use App\Models\Members;
+use App\Models\Member;
+use Exception;
 
 class LoginController extends UserController
 {
+  protected $name;
+  protected $pwd;
+
+  // public function __construct()
+  // {
+  //   parent::__construct();
+  // }
+
   public function login(Request $request)
   {
     // $credentials = $request->only('name', 'password');
 
-    // $check = parent::checkUserExist($request['name']);
+    // $check = parent::checkUserExist($request->form['name']);
     // $token = Auth::attempt($credentials);
 
-    DB::table('users')
-      ->where('name', '=', $request->name)
-      ->dump();
+    $sql = Member::where('name', '=', $request->form['name'])
+      // ->Where('password', '=', $request->form['password'])
+      ->get();
 
-    // if (!$token) {
-    //   return $this->response->error('登入失敗', 401);
-    // }
-    // if (Hash::check('secret', $request['passwrod'])) {
-    //密碼正確
-    // }
+    foreach ($sql as $key => $value) {
+      $databaseName = $value['name'];
+      $databasePWD = $value['password'];
+    }
 
+    try {
+      if (Hash::check($databasePWD, $request->form['password'])) {
+        // 密碼正確，login
+        // 欄位updated_at寫入登入時間
+        echo 'correct';
+      } else {
+        echo 'wrong';
+      }
+    } catch (Exception $e) {
+      // echo 'wrong';
+      throw $e->getMessage();
+    }
     // if (Auth::check()) {
     //     $insert_data = Auth::user();
     //     // insert data into userlogs
