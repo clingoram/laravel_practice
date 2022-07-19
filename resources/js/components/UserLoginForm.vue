@@ -48,7 +48,8 @@ export default {
       max: 20,
       form: {
         name: this.name ? this.name : "",
-        password: "",
+        password: this.password ? this.password : "",
+        role: "A" ? "A" : "M",
       },
       show: true,
     };

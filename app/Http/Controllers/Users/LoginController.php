@@ -14,42 +14,38 @@ use Exception;
 
 class LoginController extends UserController
 {
-  protected $name;
-  protected $pwd;
 
-  // public function __construct()
-  // {
-  //   parent::__construct();
-  // }
-
-  public function login(Request $request)
+  public function login()
   {
     // $credentials = $request->only('name', 'password');
 
-    // $check = parent::checkUserExist($request->form['name']);
     // $token = Auth::attempt($credentials);
 
-    $sql = Member::where('name', '=', $request->form['name'])
+    $sql = Member::where('name', '=', $this->user)
       // ->Where('password', '=', $request->form['password'])
       ->get();
 
     foreach ($sql as $key => $value) {
-      $databaseName = $value['name'];
-      $databasePWD = $value['password'];
+      $databaseValueID = $value['id'];
+      $databaseValueName = $value['name'];
+      $databaseValuePWD = $value['password'];
     }
 
-    try {
-      if (Hash::check($databasePWD, $request->form['password'])) {
-        // 密碼正確，login
-        // 欄位updated_at寫入登入時間
-        echo 'correct';
-      } else {
-        echo 'wrong';
-      }
-    } catch (Exception $e) {
-      // echo 'wrong';
-      throw $e->getMessage();
+    if (Hash::check($this->password, $databaseValuePWD)) {
+      // 密碼正確，login
+      // 欄位updated_at寫入登入時間
+      echo 'correct';
+
+      $now = new DateTime();
+      $updateLogin = Member::find($databaseValueID);
+      $updateLogin->updated_at = $now;
+      $updateLogin->save();
+    } else {
+      // redirect to login page and clear all inputs.
+      echo 'something wrong';
+      // return redirect('/login');
     }
+
     // if (Auth::check()) {
     //     $insert_data = Auth::user();
     //     // insert data into userlogs

@@ -1,23 +1,24 @@
 <template>
   <!-- 首頁，載入所有商品(圖片+名稱+價格) -->
   <div class="container">
-    <!-- <slideshow></slideshow> -->
+    <slideshow></slideshow>
   </div>
 </template>
 <script>
-// import slideshow from "./Carousel.vue";
+import slideshow from "./Carousel.vue";
 export default {
   // 首頁
-  // props: {
-  //   items_number: Number,
-  // },
+  props: {
+    // items_number: Number,
+  },
   components: {
-    // slideshow,
+    slideshow,
   },
   data: function () {
     return {
       items_number: true,
       items: [],
+      imagesShow: true,
     };
   },
   mounted() {

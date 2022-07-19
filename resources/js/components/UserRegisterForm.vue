@@ -83,7 +83,7 @@ export default {
   methods: {
     /**
      * 檢查inputs值。
-     * 若檢查通過，則把值傳給register function
+     * 若檢查通過，則true
      * */
     checkInputsValue() {
       const name = document.getElementById("register_account").value;
@@ -101,13 +101,6 @@ export default {
         alert("請重設密碼");
         return;
       }
-      // let data = {
-      //   name: name,
-      //   email: email,
-      //   pwd: pwd,
-      // };
-
-      // return [name, email, pwd];
       return true;
     },
     onSubmit(event) {
@@ -118,7 +111,6 @@ export default {
       if (this.checkInputsValue() === true) {
         return this.register();
       }
-      // return;
     },
     onReset(event) {
       event.preventDefault();

@@ -15,33 +15,28 @@ use App\Models\Member;
 class RegisterController extends UserController
 {
 
-  public function register(Request $request)
+  /**
+   * 註冊
+   */
+  public function register()
   {
     // $data = $request->all();
-    parent::validator($request->all());
-    // parent::checkUserExist($request->form['name']);
-    // parent::checkUserExist();
+    // parent::validator($request->all());
 
     $now = new DateTime();
 
-    if (parent::checkUserExist($request->form['name']) === true) {
+    // 檢查是否有該筆資料存在
+    if (parent::checkUserExist() === true) {
       return Member::create([
-        'name' => $request->form['name'],
-        'email' => $request->form['email'],
-        'password' => Hash::make($request->form['password']),
-        'role' => $request->form['role'],
+        'name' => $this->user,
+        'email' => $this->email,
+        'password' => Hash::make($this->password),
+        'role' => $this->role,
         'updated_at' => $now,
         'created_at' => $now
       ]);
+    } else {
+      echo '該帳號' . $this->user . '無法註冊。';
     }
-
-    // DB::table('users')->insert([
-    //   'name' => $request->form['name'],
-    //   'email' => $request->form['email'],
-    //   'password' => Hash::make($request->form['password']),
-    //   'role' => $request->form['role'],
-    //   'updated_at' => $now,
-    //   'created_at' => $now
-    // ]);
   }
 }
