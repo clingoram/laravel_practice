@@ -9,6 +9,7 @@ require('./bootstrap');
 import Vue from 'vue';
 // router
 import router from './router.js';
+// import auth from './auth.js';
 
 window.Vue = require('vue').default;
 
@@ -21,6 +22,7 @@ import { faShoppingCart, faSearch } from '@fortawesome/free-solid-svg-icons';
 
 
 Vue.use(router);
+// Vue.use(auth);
 Vue.use(NavbarPlugin);
 Vue.use(FormPlugin);
 Vue.use(FormInputPlugin);
@@ -63,4 +65,5 @@ Vue.component('header-component', require('./components/Header.vue').default);
 const app = new Vue({
     el: '#app',
     router: router,
+    // auth: auth,
 });

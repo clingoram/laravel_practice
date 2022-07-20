@@ -36,7 +36,7 @@ class RegisterController extends UserController
         'created_at' => $now
       ]);
     } else {
-      echo '該帳號' . $this->user . '無法註冊。';
+      echo '帳號' . $this->user . '無法註冊。';
     }
   }
 }

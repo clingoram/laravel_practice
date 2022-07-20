@@ -39,6 +39,15 @@
 </template>
 <script>
 export default {
+  // pass isLoggedIn的值到user menu
+  props: {
+    isLoggedIn: {
+      type: Boolean,
+    },
+    loggedName: {
+      type: String,
+    },
+  },
   mounted() {
     // console.log("login");
   },
@@ -71,12 +80,7 @@ export default {
         alert("密碼錯誤");
         return;
       }
-      // return {
-      //   name: name,
-      //   pwd: pwd,
-      // };
       return true;
-      // return [name, pwd];
     },
     onSubmit(event) {
       event.preventDefault();
@@ -98,14 +102,15 @@ export default {
       });
     },
     login() {
-      console.log(typeof this.form);
+      // console.log(typeof this.form);
       axios
         .post("api/shop/login", {
           form: this.form,
-          // pwd: this.form.password,
         })
         .then((response) => {
-          console.log(response);
+          this.isLoggedIn = true;
+          this.loggedName = this.form.name;
+          console.log(this.isLoggedIn);
         })
         .catch((error) => {
           console.log(error);

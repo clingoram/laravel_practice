@@ -12414,8 +12414,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (obj) { return typeof obj; } : function (obj) { return obj && "function" == typeof Symbol && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }, _typeof(obj); }
-
 //
 //
 //
@@ -12456,6 +12454,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
 //
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
+  // pass isLoggedIn的值到user menu
+  props: {
+    isLoggedIn: {
+      type: Boolean
+    },
+    loggedName: {
+      type: String
+    }
+  },
   mounted: function mounted() {// console.log("login");
   },
   data: function data() {
@@ -12487,13 +12494,9 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       if (pwd === "") {
         alert("密碼錯誤");
         return;
-      } // return {
-      //   name: name,
-      //   pwd: pwd,
-      // };
+      }
 
-
-      return true; // return [name, pwd];
+      return true;
     },
     onSubmit: function onSubmit(event) {
       event.preventDefault(); // alert(JSON.stringify(this.form));
@@ -12517,12 +12520,15 @@ function _typeof(obj) { "@babel/helpers - typeof"; return _typeof = "function" =
       });
     },
     login: function login() {
-      console.log(_typeof(this.form));
-      axios.post("api/shop/login", {
-        form: this.form // pwd: this.form.password,
+      var _this2 = this;
 
+      // console.log(typeof this.form);
+      axios.post("api/shop/login", {
+        form: this.form
       }).then(function (response) {
-        console.log(response);
+        _this2.isLoggedIn = true;
+        _this2.loggedName = _this2.form.name;
+        console.log(_this2.isLoggedIn);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -12556,8 +12562,34 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  components: {}
+  props: ["isLoggedIn", "loggedName"],
+  // components: {},
+  data: function data() {
+    isLoggIn: this.isLoggedIn;
+  },
+  computed: {// isLoggedIn: function () {
+    // if (this.isLoggIn === true) {
+    // }
+    // return "loggin";
+    // return this.$store.getters.isAuthenticated;
+    // },
+  },
+  methods: {
+    logout: function logout() {// axios
+      // .post(){
+      // }
+    }
+  }
 });
 
 /***/ }),
@@ -12752,6 +12784,7 @@ __webpack_require__(/*! ./bootstrap */ "./resources/js/bootstrap.js");
 
  // router
 
+ // import auth from './auth.js';
 
 window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js")["default"]); // bootstrap vue
 
@@ -12760,7 +12793,8 @@ window.Vue = (__webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm.js
 
 
 
-vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(_router_js__WEBPACK_IMPORTED_MODULE_0__["default"]);
+vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(_router_js__WEBPACK_IMPORTED_MODULE_0__["default"]); // Vue.use(auth);
+
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_4__.NavbarPlugin);
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_5__.FormPlugin);
 vue__WEBPACK_IMPORTED_MODULE_3__["default"].use(bootstrap_vue__WEBPACK_IMPORTED_MODULE_6__.FormInputPlugin);
@@ -12796,7 +12830,8 @@ vue__WEBPACK_IMPORTED_MODULE_3__["default"].component('header-component', (__web
 
 var app = new vue__WEBPACK_IMPORTED_MODULE_3__["default"]({
   el: '#app',
-  router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"]
+  router: _router_js__WEBPACK_IMPORTED_MODULE_0__["default"] // auth: auth,
+
 });
 
 /***/ }),
@@ -12876,7 +12911,10 @@ var routes = [{
 }, {
   path: '/login',
   component: _components_UserLoginForm_vue__WEBPACK_IMPORTED_MODULE_1__["default"],
-  name: "login-page"
+  name: "login-page",
+  meta: {
+    requiresAuth: true
+  }
 }, {
   path: '/shop',
   redirect: '/home'
@@ -60602,7 +60640,7 @@ var render = function () {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "container" }, [_c("slideshow")], 1)
+  return _c("div", { staticClass: "container" })
 }
 var staticRenderFns = []
 render._withStripped = true

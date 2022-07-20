@@ -21,8 +21,9 @@ class LoginController extends UserController
 
     // $token = Auth::attempt($credentials);
 
+    // $sql = parent::checkUserExist();
     $sql = Member::where('name', '=', $this->user)
-      // ->Where('password', '=', $request->form['password'])
+      // ->Where('password', '=', $this->password)
       ->get();
 
     foreach ($sql as $key => $value) {

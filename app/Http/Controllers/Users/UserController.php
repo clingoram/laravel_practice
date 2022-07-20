@@ -47,13 +47,21 @@ abstract class UserController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
+    protected function registerValidator(array $data)
     {
         return Validator::make($data, [
             'name' => ['required', 'string', 'max:30'],
             'email' => ['required', 'string', 'email', 'max:30', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
-            // 'role' => ['required', 'string']
+            'role' => ['required', 'string']
+        ]);
+    }
+
+    public function loginValidator(Request $request)
+    {
+        return Validator::make($request, [
+            'name' => 'required|string',
+            'password' => 'required|string',
         ]);
     }
 }

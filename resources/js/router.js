@@ -11,7 +11,7 @@ Vue.use(Router);
 // Route 設定
 export const routes = [
   { path: '/register', component: RegisterPage, name: "register-page" },
-  { path: '/login', component: LoginPage, name: "login-page" },
+  { path: '/login', component: LoginPage, name: "login-page", meta: { requiresAuth: true } },
   { path: '/shop', redirect: '/home' },
 ];
 

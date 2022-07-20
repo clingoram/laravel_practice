@@ -1,7 +1,7 @@
 <template>
   <!-- 首頁，載入所有商品(圖片+名稱+價格) -->
   <div class="container">
-    <slideshow></slideshow>
+    <!-- <slideshow></slideshow> -->
   </div>
 </template>
 <script>
