@@ -12289,6 +12289,10 @@ __webpack_require__.r(__webpack_exports__);
     searcharea: _Search_vue__WEBPACK_IMPORTED_MODULE_0__["default"],
     usermenu: _UserMenu_vue__WEBPACK_IMPORTED_MODULE_1__["default"]
   },
+  data: function data() {
+    return {//   logginName: "",
+    };
+  },
   // menu
   mounted: function mounted() {// console.log("Menu");
   } // data: function () {
@@ -12455,11 +12459,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   // pass isLoggedIn的值到user menu
+  // props:share data from parent to child.
   props: {
-    isLoggedIn: {
-      type: Boolean
-    },
-    loggedName: {
+    loggin_account: {
       type: String
     }
   },
@@ -12526,9 +12528,8 @@ __webpack_require__.r(__webpack_exports__);
       axios.post("api/shop/login", {
         form: this.form
       }).then(function (response) {
-        _this2.isLoggedIn = true;
-        _this2.loggedName = _this2.form.name;
-        console.log(_this2.isLoggedIn);
+        // console.log(this.form.name);
+        _this2.$emit("loggin_account ", _this2.form.name);
       })["catch"](function (error) {
         console.log(error);
       });
@@ -12571,23 +12572,26 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
-  props: ["isLoggedIn", "loggedName"],
+  // props:share data from parent to child.
+  // props: ["isLoggedIn", "loggedName"],
   // components: {},
   data: function data() {
-    isLoggIn: this.isLoggedIn;
+    // isLoggIn: this.isLoggedIn;
+    return {
+      name: ""
+    };
   },
-  computed: {// isLoggedIn: function () {
-    // if (this.isLoggIn === true) {
-    // }
-    // return "loggin";
-    // return this.$store.getters.isAuthenticated;
-    // },
-  },
+  computed: {},
   methods: {
     logout: function logout() {// axios
       // .post(){
       // }
+    },
+    logginAccount: function logginAccount(e) {
+      this.name = e;
+      console.log(this.name);
     }
   }
 });
@@ -12914,7 +12918,13 @@ var routes = [{
   name: "login-page",
   meta: {
     requiresAuth: true
-  }
+  } // props: ["account"],
+  // methods: {
+  //   loggin() {
+  //     // this.$emit('loggin_account ', this.account);
+  //   }
+  // }
+
 }, {
   path: '/shop',
   redirect: '/home'
@@ -60839,7 +60849,21 @@ var render = function () {
         {
           key: "button-content",
           fn: function () {
-            return [_c("em", [_vm._v("使用者")])]
+            return [
+              _c(
+                "span",
+                {
+                  on: {
+                    login: function ($event) {
+                      return _vm.logginAccount($event)
+                    },
+                  },
+                },
+                [_c("em", [_vm._v(_vm._s(_vm.name))])]
+              ),
+              _vm._v(" "),
+              _c("em", [_vm._v("使用者")]),
+            ]
           },
           proxy: true,
         },
@@ -60847,15 +60871,32 @@ var render = function () {
     },
     [
       _vm._v(" "),
-      _c("router-link", { attrs: { to: "/login" } }, [_vm._v("登入")]),
-      _vm._v(" "),
-      _c("br"),
-      _vm._v(" "),
-      _c("router-link", { attrs: { to: { name: "register-page" } } }, [
-        _vm._v("註冊"),
-      ]),
-    ],
-    1
+      _vm.name !== ""
+        ? _c(
+            "span",
+            [
+              _c(
+                "b-button",
+                { attrs: { type: "submit", variant: "outline-primary" } },
+                [_vm._v("登出")]
+              ),
+            ],
+            1
+          )
+        : _c(
+            "span",
+            [
+              _c("router-link", { attrs: { to: "/login" } }, [_vm._v("登入")]),
+              _vm._v(" "),
+              _c("br"),
+              _vm._v(" "),
+              _c("router-link", { attrs: { to: { name: "register-page" } } }, [
+                _vm._v("註冊"),
+              ]),
+            ],
+            1
+          ),
+    ]
   )
 }
 var staticRenderFns = []

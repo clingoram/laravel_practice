@@ -10,9 +10,27 @@ Vue.use(Router);
 
 // Route 設定
 export const routes = [
-  { path: '/register', component: RegisterPage, name: "register-page" },
-  { path: '/login', component: LoginPage, name: "login-page", meta: { requiresAuth: true } },
-  { path: '/shop', redirect: '/home' },
+  {
+    path: '/register',
+    component: RegisterPage,
+    name: "register-page"
+  },
+  {
+    path: '/login',
+    component: LoginPage,
+    name: "login-page",
+    meta: { requiresAuth: true },
+    // props: ["account"],
+    // methods: {
+    //   loggin() {
+    //     // this.$emit('loggin_account ', this.account);
+    //   }
+    // }
+  },
+  {
+    path: '/shop',
+    redirect: '/home'
+  },
 ];
 
 // 建立 Vue Router instance

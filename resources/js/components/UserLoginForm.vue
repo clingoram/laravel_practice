@@ -40,11 +40,9 @@
 <script>
 export default {
   // pass isLoggedIn的值到user menu
+  // props:share data from parent to child.
   props: {
-    isLoggedIn: {
-      type: Boolean,
-    },
-    loggedName: {
+    loggin_account: {
       type: String,
     },
   },
@@ -108,9 +106,8 @@ export default {
           form: this.form,
         })
         .then((response) => {
-          this.isLoggedIn = true;
-          this.loggedName = this.form.name;
-          console.log(this.isLoggedIn);
+          // console.log(this.form.name);
+          this.$emit("loggin_account ", this.form.name);
         })
         .catch((error) => {
           console.log(error);

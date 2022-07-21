@@ -24,6 +24,11 @@ export default {
     searcharea,
     usermenu,
   },
+  data() {
+    return {
+      //   logginName: "",
+    };
+  },
   // menu
   mounted() {
     // console.log("Menu");
