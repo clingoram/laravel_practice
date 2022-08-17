@@ -24,7 +24,6 @@ abstract class UserController extends Controller
         $this->user = $data->form['name'];
         $this->email = isset($data->form['email']) and !empty($data->form['email']) ? $data->form['email'] : null;
         $this->password = $data->form['password'];
-        $this->role = isset($data->form['role']) and !empty($data->form['role']) ? $data->form['role'] : 'M';
     }
 
     /**
